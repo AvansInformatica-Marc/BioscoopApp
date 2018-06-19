@@ -1,19 +1,25 @@
 apply plugin: 'com.android.application'
 
+def versionMajor = 0
+def versionMinor = 1
+def versionPatch = 0
+
 android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "nl.bioscoop.mijnbios"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode versionMajor * 10_000 + versionMinor * 100 + versionPatch
+        versionName "$versionMajor.$versionMinor.$versionPatch"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
