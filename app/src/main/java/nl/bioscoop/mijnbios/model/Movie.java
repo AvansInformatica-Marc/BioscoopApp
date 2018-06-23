@@ -5,7 +5,9 @@ import android.support.annotation.NonNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable{
     private int id;
     private @NonNull String title;
     private @NonNull String description;
