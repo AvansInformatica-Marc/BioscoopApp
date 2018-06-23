@@ -2,6 +2,9 @@ package nl.bioscoop.mijnbios.model;
 
 import android.support.annotation.NonNull;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Movie {
     private int id;
     private @NonNull String title;
@@ -9,6 +12,17 @@ public class Movie {
     private int minAge;
     private int duration;
     private @NonNull String poster;
+
+    public Movie(JSONObject json) throws JSONException{
+        this(
+                json.getInt("id"),
+                json.getString("name"),
+                json.getString("description"),
+                json.getInt("minAge"),
+                json.getInt("duration"),
+                json.getString("poster")
+        );
+    }
 
     public Movie(int id, @NonNull String title, @NonNull String description, int minAge, int duration, @NonNull String poster) {
         this.id = id;

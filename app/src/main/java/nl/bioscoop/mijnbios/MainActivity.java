@@ -85,8 +85,7 @@ public class MainActivity extends Activity {
             movies.clear();
             for (int i = 0; i < moviesList.length(); i++){
                 @Nullable JSONObject movie = moviesList.optJSONObject(i);
-                if(movie != null)
-                    movies.add(new Movie(movie.getInt("id"), movie.getString("name"), movie.getString("description"), movie.getInt("minAge"), movie.getInt("duration"), movie.getString("poster")));
+                if(movie != null) movies.add(new Movie(movie));
             }
             runOnUiThread(() -> ((ArrayAdapter) movieGrid.getAdapter()).notifyDataSetChanged());
         } catch (JSONException e) {
