@@ -4,6 +4,9 @@
         <item name="android:colorPrimary">@color/colorPrimary</item>
         <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:scrollbarThumbVertical">?android:attr/colorAccent</item>
+        <item name="android:scrollbarThumbHorizontal">?android:attr/colorAccent</item>
+        <item name="android:scrollbarSize">2dp</item>
     </style>
 
 </resources>
