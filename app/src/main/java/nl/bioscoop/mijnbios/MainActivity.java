@@ -22,12 +22,13 @@ public class MainActivity extends Activity {
     private DataLoader dataLoader;
     private GridView movieGrid;
     private ArrayList<Movie> movies;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override @CallSuper protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefresh);
+        swipeRefreshLayout = findViewById(R.id.swipeRefresh);
         swipeRefreshLayout.setRefreshing(true);
         swipeRefreshLayout.setOnRefreshListener(this::showAllMovies);
 
@@ -47,6 +48,7 @@ public class MainActivity extends Activity {
     }
 
     private void showAllMovies(){
+        swipeRefreshLayout.setRefreshing(true);
         dataLoader.load("https://mijnbios.herokuapp.com/api/v1/movies", (responseBody) -> {
             if(responseBody == null) return;
 
@@ -61,6 +63,8 @@ public class MainActivity extends Activity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+            swipeRefreshLayout.setRefreshing(false);
         });
     }
 }
