@@ -46,6 +46,7 @@ public class MainActivity extends Activity {
         api.getAllMovies((moviesList) -> {
             movies.clear();
             movies.addAll(moviesList);
+            runOnUiThread(((MovieAdapter) movieGrid.getAdapter())::notifyDataSetChanged);
             swipeRefreshLayout.setRefreshing(false);
         });
     }
