@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
 
 import org.json.JSONArray;
@@ -29,12 +31,21 @@ import okhttp3.ResponseBody;
 public class MainActivity extends Activity {
     private OkHttpClient client;
     private GridView movieGrid;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private ArrayList<Movie> movies;
 
     @Override @CallSuper protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        swipeRefreshLayout = findViewById(R.id.swipeRefresh);
+        swipeRefreshLayout.setRefreshing(true);
+        swipeRefreshLayout.setOnRefreshListener(this::showAllMovies);
+
+        movies = new ArrayList<>();
         movieGrid = findViewById(R.id.grid);
+        movieGrid.setAdapter(new MovieAdapter(MainActivity.this, movies));
+
         client = new OkHttpClient.Builder()
                 .cache(new Cache(new File(getCacheDir(), "http"), 10 * 1024 * 1024))
                 .build();
@@ -47,6 +58,7 @@ public class MainActivity extends Activity {
 
     @RequiresPermission(Manifest.permission.INTERNET)
     private void showAllMovies(@Nullable CacheControl cacheControl) {
+        swipeRefreshLayout.setRefreshing(true);
         Request.Builder defaultRequest = new Request.Builder().url("https://mijnbios.herokuapp.com/api/v1/movies");
         if(cacheControl != null) defaultRequest.cacheControl(cacheControl);
         Request request = defaultRequest.build();
@@ -59,6 +71,7 @@ public class MainActivity extends Activity {
             @Override public void onResponse(@Nullable Call call, @Nullable final Response response) throws IOException {
                 ResponseBody responseBody = response != null ? response.body() : null;
                 String responseString = responseBody != null ? responseBody.string() : null;
+                swipeRefreshLayout.setRefreshing(false);
                 onMoviesFetched(responseString);
             }
         });
@@ -69,13 +82,13 @@ public class MainActivity extends Activity {
 
         try {
             JSONArray moviesList = new JSONArray(responseBody);
-            ArrayList<Movie> movies = new ArrayList<>();
+            movies.clear();
             for (int i = 0; i < moviesList.length(); i++){
                 @Nullable JSONObject movie = moviesList.optJSONObject(i);
                 if(movie != null)
                     movies.add(new Movie(movie.getInt("id"), movie.getString("name"), movie.getString("description"), movie.getInt("minAge"), movie.getInt("duration"), movie.getString("poster")));
             }
-            runOnUiThread(() -> movieGrid.setAdapter(new MovieAdapter(MainActivity.this, movies)));
+            runOnUiThread(() -> ((ArrayAdapter) movieGrid.getAdapter()).notifyDataSetChanged());
         } catch (JSONException e) {
             e.printStackTrace();
         }
