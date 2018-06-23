@@ -11,6 +11,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -47,5 +48,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         if(actionBar != null) actionBar.setTitle(movie.getTitle());
 
         Picasso.with(this).load(movie.getPoster()).into((ImageView) findViewById(R.id.actionBarImage));
+
+        TextView description = findViewById(R.id.description);
+        description.setText(movie.getDescription());
     }
 }
