@@ -4,14 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -19,7 +13,7 @@ import nl.bioscoop.mijnbios.model.Movie;
 import nl.bioscoop.mijnbios.utils.DataLoader;
 
 public class MainActivity extends Activity {
-    private DataLoader dataLoader;
+    private Api api;
     private GridView movieGrid;
     private ArrayList<Movie> movies;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -42,28 +36,16 @@ public class MainActivity extends Activity {
             startActivity(intent);
         });
 
-        dataLoader = new DataLoader(this);
+        api = new Api(new DataLoader(this));
 
         showAllMovies();
     }
 
     private void showAllMovies(){
         swipeRefreshLayout.setRefreshing(true);
-        dataLoader.load("https://mijnbios.herokuapp.com/api/v1/movies", (responseBody) -> {
-            if(responseBody == null) return;
-
-            try {
-                JSONArray moviesList = new JSONArray(responseBody);
-                movies.clear();
-                for (int i = 0; i < moviesList.length(); i++){
-                    @Nullable JSONObject movie = moviesList.optJSONObject(i);
-                    if(movie != null) movies.add(new Movie(movie));
-                }
-                runOnUiThread(() -> ((ArrayAdapter) movieGrid.getAdapter()).notifyDataSetChanged());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
+        api.getAllMovies((moviesList) -> {
+            movies.clear();
+            movies.addAll(moviesList);
             swipeRefreshLayout.setRefreshing(false);
         });
     }
