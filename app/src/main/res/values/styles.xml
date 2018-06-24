@@ -11,12 +11,6 @@
         <item name="android:scrollbarThumbVertical">?android:attr/colorAccent</item>
         <item name="android:scrollbarThumbHorizontal">?android:attr/colorAccent</item>
         <item name="android:scrollbarSize">2dp</item>
-
-        <!-- Animations -->
-        <item name="android:windowContentTransitions">true</item>
-        <item name="android:windowActivityTransitions">true</item>
-        <item name="android:windowSharedElementEnterTransition">@transition/movie_poster_transition</item>
-        <item name="android:windowSharedElementExitTransition">@transition/movie_poster_transition</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">

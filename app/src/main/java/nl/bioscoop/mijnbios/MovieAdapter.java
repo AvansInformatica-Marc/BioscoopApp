@@ -13,18 +13,18 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import nl.bioscoop.mijnbios.model.Movie;
+import nl.bioscoop.mijnbios.model.movie.MoviePoster;
 
 import static nl.bioscoop.mijnbios.utils.Views.inflateLayout;
 
-public class MovieAdapter extends ArrayAdapter<Movie> {
-    public MovieAdapter(@NonNull Context context, @NonNull ArrayList<Movie> list){
+public class MovieAdapter extends ArrayAdapter<MoviePoster> {
+    public MovieAdapter(@NonNull Context context, @NonNull ArrayList<MoviePoster> list){
         super(context, 0, list);
     }
 
     @Override @NonNull public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         @NonNull View view = convertView != null ? convertView : inflateLayout(R.layout.movie_griditem, parent);
-        @Nullable Movie movie = getItem(position);
+        @Nullable MoviePoster movie = getItem(position);
 
         if(movie == null) {
             view.setVisibility(View.GONE);

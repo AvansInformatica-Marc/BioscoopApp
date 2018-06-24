@@ -7,29 +7,27 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import nl.bioscoop.mijnbios.model.Movie;
+import nl.bioscoop.mijnbios.model.movie.MoviePoster;
+import nl.bioscoop.mijnbios.utils.DataLoader;
 
 public class MovieDetailActivity extends AppCompatActivity {
+    private Api api;
+
     @Override @CallSuper protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        View view = toolbar.getChildAt(0);
-        if(view instanceof AppCompatTextView) view.setTransitionName("movieTitleTransition");
-
         loadActionbar();
 
+        api = new Api(new DataLoader(this));
+
         Intent intent = getIntent();
-        @Nullable Movie movie = (Movie) intent.getSerializableExtra("Movie");
+        @Nullable MoviePoster movie = (MoviePoster) intent.getSerializableExtra("Movie");
         if(movie != null) loadMovieData(movie);
     }
 
@@ -43,13 +41,19 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
     }
 
-    public void loadMovieData(@NonNull Movie movie){
+    public void loadMovieData(@NonNull MoviePoster moviePoster){
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null) actionBar.setTitle(movie.getTitle());
+        if(actionBar != null) actionBar.setTitle(moviePoster.getTitle());
 
-        Picasso.with(this).load(movie.getPoster()).into((ImageView) findViewById(R.id.actionBarImage));
+        api.getMovieDetail(moviePoster.getId(), (movie) -> {
+            runOnUiThread(() -> {
+                if(actionBar != null) actionBar.setTitle(movie.getTitle());
 
-        TextView description = findViewById(R.id.description);
-        description.setText(movie.getDescription());
+                Picasso.with(this).load(movie.getBackdrop()).into((ImageView) findViewById(R.id.actionBarImage));
+
+                TextView description = findViewById(R.id.description);
+                description.setText(movie.getDescription());
+            });
+        });
     }
 }
