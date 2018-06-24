@@ -27,7 +27,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         api = new Api(new DataLoader(this));
 
         Intent intent = getIntent();
-        @Nullable MoviePoster movie = (MoviePoster) intent.getSerializableExtra("Movie");
+        @Nullable MoviePoster movie = (MoviePoster) intent.getSerializableExtra("MoviePoster");
         if(movie != null) loadMovieData(movie);
     }
 
