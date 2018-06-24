@@ -24,6 +24,8 @@
         </activity>
         <activity
             android:name=".MovieDetailActivity"
+            android:configChanges="keyboard|keyboardHidden|mcc|mnc|orientation|screenSize|locale|layoutDirection|smallestScreenSize|screenLayout|uiMode"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.AppCompat.NoActionBar" />
     </application>
 

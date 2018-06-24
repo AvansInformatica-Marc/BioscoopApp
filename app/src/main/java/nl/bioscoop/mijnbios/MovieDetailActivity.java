@@ -7,16 +7,22 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import nl.bioscoop.mijnbios.model.movie.MoviePoster;
 import nl.bioscoop.mijnbios.utils.DataLoader;
+import nl.bioscoop.mijnbios.utils.Views;
 
 public class MovieDetailActivity extends AppCompatActivity {
     private Api api;
+    private LinearLayout detailsList;
 
     @Override @CallSuper protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +31,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         loadActionbar();
 
         api = new Api(new DataLoader(this));
+
+        detailsList = findViewById(R.id.detailsList);
 
         Intent intent = getIntent();
         @Nullable MoviePoster movie = (MoviePoster) intent.getSerializableExtra("MoviePoster");
@@ -41,7 +49,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
     }
 
-    public void loadMovieData(@NonNull MoviePoster moviePoster){
+    private void loadMovieData(@NonNull MoviePoster moviePoster){
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null) actionBar.setTitle(moviePoster.getTitle());
 
@@ -50,8 +58,27 @@ public class MovieDetailActivity extends AppCompatActivity {
 
             Picasso.with(this).load(movie.getBackdrop()).into((ImageView) findViewById(R.id.actionBarImage));
 
-            TextView description = findViewById(R.id.description);
-            description.setText(movie.getDescription());
+            detailsList.addView(generateDetailView("Beschrijving", movie.getDescription(), R.drawable.ic_info));
         }));
+    }
+
+    private RelativeLayout generateDetailView(@NonNull String title, @NonNull String content, @Nullable Integer imageResource){
+        RelativeLayout descriptionView = Views.inflateLayout(R.layout.movie_content_item, detailsList);
+
+        ImageView icon = descriptionView.findViewById(R.id.icon);
+        if(imageResource != null) icon.setImageResource(imageResource);
+        else icon.setVisibility(View.INVISIBLE);
+
+        TextView titleView = descriptionView.findViewById(R.id.title);
+        titleView.setText(title);
+
+        TextView contentView = descriptionView.findViewById(R.id.content);
+        contentView.setText(content);
+
+        return descriptionView;
+    }
+
+    public void book(View view){
+        Toast.makeText(this, "Book movie", Toast.LENGTH_LONG).show();
     }
 }
