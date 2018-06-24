@@ -1,10 +1,10 @@
 package nl.bioscoop.mijnbios;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import nl.bioscoop.mijnbios.model.movie.MoviePoster;
 import nl.bioscoop.mijnbios.utils.DataLoader;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     private Api api;
     private GridView movieGrid;
     private ArrayList<MoviePoster> movies;

@@ -45,15 +45,13 @@ public class MovieDetailActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null) actionBar.setTitle(moviePoster.getTitle());
 
-        api.getMovieDetail(moviePoster.getId(), (movie) -> {
-            runOnUiThread(() -> {
-                if(actionBar != null) actionBar.setTitle(movie.getTitle());
+        api.getMovieDetail(moviePoster.getId(), (movie) -> runOnUiThread(() -> {
+            if(actionBar != null) actionBar.setTitle(movie.getTitle());
 
-                Picasso.with(this).load(movie.getBackdrop()).into((ImageView) findViewById(R.id.actionBarImage));
+            Picasso.with(this).load(movie.getBackdrop()).into((ImageView) findViewById(R.id.actionBarImage));
 
-                TextView description = findViewById(R.id.description);
-                description.setText(movie.getDescription());
-            });
-        });
+            TextView description = findViewById(R.id.description);
+            description.setText(movie.getDescription());
+        }));
     }
 }
