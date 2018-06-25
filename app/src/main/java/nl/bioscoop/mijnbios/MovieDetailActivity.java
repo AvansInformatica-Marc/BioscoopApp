@@ -12,11 +12,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import nl.bioscoop.biosapi.BiosAPI;
+import nl.bioscoop.biosapi.model.movie.MovieDetails;
 import nl.bioscoop.biosapi.model.movie.MoviePoster;
 import nl.bioscoop.biosapi.utils.DataLoader;
 import nl.bioscoop.mijnbios.utils.Views;
@@ -24,6 +24,7 @@ import nl.bioscoop.mijnbios.utils.Views;
 public class MovieDetailActivity extends AppCompatActivity {
     private BiosAPI api;
     private LinearLayout detailsList;
+    private MovieDetails movie;
 
     @Override @CallSuper protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         loadActionbar();
 
-        api = new BiosAPI(new DataLoader(this, 10), getResources().getString(R.string.languageCode));
+        api = new BiosAPI(new DataLoader(this, Config.MAX_CACHE_SIZE_MB), getResources().getString(R.string.languageCode));
 
         detailsList = findViewById(R.id.detailsList);
 
@@ -55,6 +56,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         if(actionBar != null) actionBar.setTitle(moviePoster.getTitle());
 
         api.getMovieDetail(moviePoster.getId(), (movie) -> runOnUiThread(() -> {
+            this.movie = movie;
             if(actionBar != null) actionBar.setTitle(movie.getTitle());
 
             Picasso.with(this).load(movie.getBackdrop()).into((ImageView) findViewById(R.id.actionBarImage));
@@ -80,6 +82,8 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     public void book(View view){
-        Toast.makeText(this, "Book movie", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, MovieShowPicker.class);
+        intent.putExtra(Config.EXTRA_MOVIE, movie);
+        startActivity(intent);
     }
 }

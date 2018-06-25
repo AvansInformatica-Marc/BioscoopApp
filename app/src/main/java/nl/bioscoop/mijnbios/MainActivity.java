@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        api = new BiosAPI(new DataLoader(this, 10), getResources().getString(R.string.languageCode));
+        api = new BiosAPI(new DataLoader(this, Config.MAX_CACHE_SIZE_MB), getResources().getString(R.string.languageCode));
 
         showAllMovies();
     }
