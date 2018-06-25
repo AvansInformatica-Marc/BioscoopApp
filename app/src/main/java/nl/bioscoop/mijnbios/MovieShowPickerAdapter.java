@@ -6,9 +6,12 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import nl.bioscoop.biosapi.model.MovieShow;
 
@@ -26,8 +29,13 @@ public class MovieShowPickerAdapter extends ArrayAdapter<MovieShow> {
         if(movieShow == null) {
             view.setVisibility(View.GONE);
         } else {
+            View card = view.findViewById(R.id.card);
+            card.setOnClickListener(view1 -> ((ListView) parent).performItemClick(convertView, position, position));
+
             TextView datetime = view.findViewById(R.id.datetime);
-            datetime.setText(movieShow.getDatetime());
+            datetime.setText(DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault()).format(movieShow.getDatetime()) + " - " +
+                    DateFormat.getTimeInstance(DateFormat.SHORT, Locale.getDefault()).format(movieShow.getDatetime()));
+
             TextView location = view.findViewById(R.id.location);
             location.setText(movieShow.getLocation());
         }

@@ -17,14 +17,13 @@ import com.squareup.picasso.Picasso;
 
 import nl.bioscoop.biosapi.BiosAPI;
 import nl.bioscoop.biosapi.model.movie.Movie;
-import nl.bioscoop.biosapi.model.movie.MovieDetails;
 import nl.bioscoop.biosapi.utils.DataLoader;
 import nl.bioscoop.mijnbios.utils.Views;
 
 public class MovieDetailActivity extends AppCompatActivity {
     private BiosAPI api;
     private LinearLayout detailsList;
-    private MovieDetails movie;
+    private Movie movie;
 
     @Override @CallSuper protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +36,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         detailsList = findViewById(R.id.detailsList);
 
         Intent intent = getIntent();
-        @Nullable Movie movie = (Movie) intent.getSerializableExtra(Config.EXTRA_MOVIE);
+        movie = (Movie) intent.getSerializableExtra(Config.EXTRA_MOVIE);
         if(movie != null) loadMovieData(movie);
     }
 
