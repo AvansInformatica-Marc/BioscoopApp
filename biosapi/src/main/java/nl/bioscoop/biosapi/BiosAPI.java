@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import nl.bioscoop.biosapi.model.MovieShow;
 import nl.bioscoop.biosapi.model.movie.MovieDetails;
 import nl.bioscoop.biosapi.model.movie.MoviePoster;
 import nl.bioscoop.biosapi.utils.DataLoader;
@@ -61,13 +62,20 @@ public class BiosAPI {
         });
     }
 
-    public void getShowsForMovie(int id, @NonNull ValueCallback<ArrayList<Object>> callback){
+    public void getShowsForMovie(int id, @NonNull ValueCallback<ArrayList<MovieShow>> callback){
         dataLoader.load(API_URL + "movies/" + String.valueOf(id) + "/shows&language=" + languageCode, (responseBody) -> {
             if(responseBody == null) return;
 
             try {
-                JSONArray shows = new JSONArray(responseBody);
-                // TODO
+                JSONArray showsList = new JSONArray(responseBody);
+                ArrayList<MovieShow> shows = new ArrayList<>();
+
+                for (int i = 0; i < showsList.length(); i++){
+                    @Nullable JSONObject show = showsList.optJSONObject(i);
+                    if(show != null) shows.add(new MovieShow(show));
+                }
+
+                callback.onReceiveValue(shows);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
