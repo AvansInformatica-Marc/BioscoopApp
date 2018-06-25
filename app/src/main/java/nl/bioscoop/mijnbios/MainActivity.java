@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     abstract class Tab<T> {
         protected ArrayList<T> list;
         protected AbsListView listView;
+        private boolean hasDataBeenLoaded = false;
 
         public Tab(int listViewId){
             list = new ArrayList<>();
@@ -69,7 +70,10 @@ public class MainActivity extends AppCompatActivity {
 
         public void onShow(){
             listView.setVisibility(View.VISIBLE);
-            loadData();
+            if(!hasDataBeenLoaded){
+                hasDataBeenLoaded = true;
+                loadData();
+            }
         }
 
         abstract void loadData();
