@@ -63,7 +63,7 @@ public class BiosAPI {
     }
 
     public void getShowsForMovie(int id, @NonNull ValueCallback<ArrayList<MovieShow>> callback){
-        dataLoader.load(API_URL + "movies/" + String.valueOf(id) + "/shows&language=" + languageCode, (responseBody) -> {
+        dataLoader.load(API_URL + "movies/" + String.valueOf(id) + "/shows?language=" + languageCode, (responseBody) -> {
             if(responseBody == null) return;
 
             try {
