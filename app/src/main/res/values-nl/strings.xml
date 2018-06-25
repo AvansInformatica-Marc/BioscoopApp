@@ -5,4 +5,7 @@
     <string name="movie">Film</string>
     <string name="book">Reserveer</string>
     <string name="languageCode">nl-NL</string>
+    <string name="locations">Locaties</string>
+    <string name="tickets">Kaartjes</string>
+    <string name="movies">Films</string>
 </resources>

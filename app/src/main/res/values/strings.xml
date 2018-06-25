@@ -4,4 +4,7 @@
     <string name="movie">Movie</string>
     <string name="book">Book</string>
     <string name="languageCode">en-US</string>
+    <string name="locations">Locations</string>
+    <string name="tickets">Tickets</string>
+    <string name="movies">Movies</string>
 </resources>

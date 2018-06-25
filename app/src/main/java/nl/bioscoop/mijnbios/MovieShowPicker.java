@@ -1,12 +1,12 @@
 package nl.bioscoop.mijnbios;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import nl.bioscoop.biosapi.model.MovieShow;
 import nl.bioscoop.biosapi.model.movie.Movie;
 import nl.bioscoop.biosapi.utils.DataLoader;
 
-public class MovieShowPicker extends Activity {
+public class MovieShowPicker extends AppCompatActivity {
     private BiosAPI api;
     private ListView items;
     private ArrayList<MovieShow> movieShows;
