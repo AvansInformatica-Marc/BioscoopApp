@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MijnBios</string>
+    <string name="description">Beschrijving</string>
+    <string name="movie">Film</string>
+    <string name="book">Reserveer</string>
+    <string name="languageCode">nl-NL</string>
+</resources>

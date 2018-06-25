@@ -24,6 +24,6 @@
         android:maxLines="2"
         android:padding="8dp"
         android:textColor="#FFFFFF"
-        tools:text="Movie" />
+        tools:text="@string/movie" />
 
 </RelativeLayout>

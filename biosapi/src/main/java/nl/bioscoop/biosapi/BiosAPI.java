@@ -16,13 +16,19 @@ import nl.bioscoop.biosapi.utils.DataLoader;
 
 public class BiosAPI {
     private @NonNull DataLoader dataLoader;
+    private @NonNull String languageCode;
 
     public BiosAPI(@NonNull DataLoader dataLoader) {
+        this(dataLoader, "en-US");
+    }
+
+    public BiosAPI(@NonNull DataLoader dataLoader, @NonNull String languageCode) {
         this.dataLoader = dataLoader;
+        this.languageCode = languageCode;
     }
 
     public void getAllMoviePosters(@NonNull ValueCallback<ArrayList<MoviePoster>> callback){
-        dataLoader.load("https://mijnbios.herokuapp.com/api/v1/shows/movies?displayType=poster", (responseBody) -> {
+        dataLoader.load("https://mijnbios.herokuapp.com/api/v1/shows/movies?displayType=poster&language=" + languageCode, (responseBody) -> {
             if(responseBody == null) return;
 
             try {
@@ -42,7 +48,7 @@ public class BiosAPI {
     }
 
     public void getMovieDetail(int id, @NonNull ValueCallback<MovieDetails> callback){
-        dataLoader.load("https://mijnbios.herokuapp.com/api/v1/movies/" + String.valueOf(id) + "?displayType=details", (responseBody) -> {
+        dataLoader.load("https://mijnbios.herokuapp.com/api/v1/movies/" + String.valueOf(id) + "?displayType=details&language=" + languageCode, (responseBody) -> {
             if(responseBody == null) return;
 
             try {

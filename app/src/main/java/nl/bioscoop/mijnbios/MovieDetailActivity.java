@@ -31,12 +31,12 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         loadActionbar();
 
-        api = new BiosAPI(new DataLoader(this, 10));
+        api = new BiosAPI(new DataLoader(this, 10), getResources().getString(R.string.languageCode));
 
         detailsList = findViewById(R.id.detailsList);
 
         Intent intent = getIntent();
-        @Nullable MoviePoster movie = (MoviePoster) intent.getSerializableExtra("MoviePoster");
+        @Nullable MoviePoster movie = (MoviePoster) intent.getSerializableExtra(Config.EXTRA_MOVIEPOSTER);
         if(movie != null) loadMovieData(movie);
     }
 
@@ -59,7 +59,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
             Picasso.with(this).load(movie.getBackdrop()).into((ImageView) findViewById(R.id.actionBarImage));
 
-            detailsList.addView(generateDetailView("Beschrijving", movie.getDescription(), R.drawable.ic_info));
+            detailsList.addView(generateDetailView(getResources().getString(R.string.description), movie.getDescription(), R.drawable.ic_info));
         }));
     }
 

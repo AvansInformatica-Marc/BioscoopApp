@@ -42,7 +42,7 @@
                 android:fitsSystemWindows="false"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark"
                 app:layout_collapseMode="pin"
-                app:title="Movie" />
+                app:title="@string/movie" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
