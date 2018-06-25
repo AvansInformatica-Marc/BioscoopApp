@@ -8,7 +8,6 @@ import org.json.JSONObject;
 import java.io.Serializable;
 
 public class MovieDetails extends Movie implements Serializable {
-    private @NonNull String title;
     private @NonNull String backdrop;
     private @NonNull String description;
 
@@ -17,14 +16,9 @@ public class MovieDetails extends Movie implements Serializable {
     }
 
     public MovieDetails(int id, @NonNull String title, @NonNull String backdrop, @NonNull String description) {
-        super(id);
-        this.title = title;
+        super(id, title);
         this.backdrop = backdrop;
         this.description = description;
-    }
-
-    @NonNull public String getTitle() {
-        return title;
     }
 
     @NonNull public String getBackdrop() {

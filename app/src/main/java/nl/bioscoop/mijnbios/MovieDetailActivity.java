@@ -18,7 +18,6 @@ import com.squareup.picasso.Picasso;
 import nl.bioscoop.biosapi.BiosAPI;
 import nl.bioscoop.biosapi.model.movie.Movie;
 import nl.bioscoop.biosapi.model.movie.MovieDetails;
-import nl.bioscoop.biosapi.model.movie.MoviePoster;
 import nl.bioscoop.biosapi.utils.DataLoader;
 import nl.bioscoop.mijnbios.utils.Views;
 
@@ -54,7 +53,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     private void loadMovieData(@NonNull Movie moviePoster){
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null && moviePoster instanceof MoviePoster) actionBar.setTitle(((MoviePoster) moviePoster).getTitle());
+        if(actionBar != null) actionBar.setTitle(moviePoster.getTitle());
 
         api.getMovieDetail(moviePoster.getId(), (movie) -> runOnUiThread(() -> {
             this.movie = movie;

@@ -8,7 +8,6 @@ import org.json.JSONObject;
 import java.io.Serializable;
 
 public class MoviePoster extends Movie implements Serializable {
-    private @NonNull String title;
     private @NonNull String poster;
 
     public MoviePoster(@NonNull JSONObject json) throws JSONException {
@@ -16,13 +15,8 @@ public class MoviePoster extends Movie implements Serializable {
     }
 
     public MoviePoster(int id, @NonNull String title, @NonNull String poster) {
-        super(id);
-        this.title = title;
+        super(id, title);
         this.poster = poster;
-    }
-
-    @NonNull public String getTitle() {
-        return title;
     }
 
     @NonNull public String getPoster() {
