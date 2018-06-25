@@ -31,6 +31,7 @@
         <activity
             android:name=".MovieShowPicker"
             android:configChanges="keyboard|keyboardHidden|mcc|mnc|orientation|screenSize|locale|layoutDirection|smallestScreenSize|screenLayout|uiMode"
+            android:label="@string/book"
             android:launchMode="singleTask"
             android:parentActivityName=".MainActivity" />
     </application>

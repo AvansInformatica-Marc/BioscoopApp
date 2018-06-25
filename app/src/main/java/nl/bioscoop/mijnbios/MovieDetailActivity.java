@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import nl.bioscoop.biosapi.BiosAPI;
+import nl.bioscoop.biosapi.model.movie.Movie;
 import nl.bioscoop.biosapi.model.movie.MovieDetails;
 import nl.bioscoop.biosapi.model.movie.MoviePoster;
 import nl.bioscoop.biosapi.utils.DataLoader;
@@ -37,7 +38,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         detailsList = findViewById(R.id.detailsList);
 
         Intent intent = getIntent();
-        @Nullable MoviePoster movie = (MoviePoster) intent.getSerializableExtra(Config.EXTRA_MOVIEPOSTER);
+        @Nullable Movie movie = (Movie) intent.getSerializableExtra(Config.EXTRA_MOVIE);
         if(movie != null) loadMovieData(movie);
     }
 
@@ -51,9 +52,9 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
     }
 
-    private void loadMovieData(@NonNull MoviePoster moviePoster){
+    private void loadMovieData(@NonNull Movie moviePoster){
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null) actionBar.setTitle(moviePoster.getTitle());
+        if(actionBar != null && moviePoster instanceof MoviePoster) actionBar.setTitle(((MoviePoster) moviePoster).getTitle());
 
         api.getMovieDetail(moviePoster.getId(), (movie) -> runOnUiThread(() -> {
             this.movie = movie;

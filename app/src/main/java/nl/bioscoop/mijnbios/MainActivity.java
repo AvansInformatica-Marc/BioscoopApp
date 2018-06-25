@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
             MoviePoster movie = ((MovieAdapter) movieGrid.getAdapter()).getItem(i);
             if(movie != null) {
                 Intent intent = new Intent(MainActivity.this, MovieDetailActivity.class);
-                intent.putExtra(Config.EXTRA_MOVIEPOSTER, movie);
+                intent.putExtra(Config.EXTRA_MOVIE, movie);
                 startActivity(intent);
             }
         });

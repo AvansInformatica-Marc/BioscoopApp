@@ -10,6 +10,8 @@ import android.support.annotation.Nullable;
 
 import nl.bioscoop.biosapi.BiosAPI;
 import nl.bioscoop.biosapi.model.movie.Movie;
+import nl.bioscoop.biosapi.model.movie.MovieDetails;
+import nl.bioscoop.biosapi.model.movie.MoviePoster;
 import nl.bioscoop.biosapi.utils.DataLoader;
 
 public class MovieShowPicker extends Activity {
@@ -35,6 +37,9 @@ public class MovieShowPicker extends Activity {
     }
 
     private void loadData(@NonNull Movie movie){
+        if(movie instanceof MoviePoster) setTitle(getResources().getString(R.string.book) + " (" + ((MoviePoster) movie).getTitle() + ")");
+        else if(movie instanceof MovieDetails) setTitle(getResources().getString(R.string.book) + " (" + ((MovieDetails) movie).getTitle() + ")");
+
         api.getShowsForMovie(movie.getId(), (list) -> {
             // TODO
         });
