@@ -9,11 +9,12 @@ import android.widget.GridView;
 
 import java.util.ArrayList;
 
-import nl.bioscoop.mijnbios.model.movie.MoviePoster;
-import nl.bioscoop.mijnbios.utils.DataLoader;
+import nl.bioscoop.biosapi.BiosAPI;
+import nl.bioscoop.biosapi.model.movie.MoviePoster;
+import nl.bioscoop.biosapi.utils.DataLoader;
 
 public class MainActivity extends Activity {
-    private Api api;
+    private BiosAPI api;
     private GridView movieGrid;
     private ArrayList<MoviePoster> movies;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -39,7 +40,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        api = new Api(new DataLoader(this));
+        api = new BiosAPI(new DataLoader(this, 10));
 
         showAllMovies();
     }

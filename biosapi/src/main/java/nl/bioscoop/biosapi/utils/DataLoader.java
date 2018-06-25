@@ -1,4 +1,4 @@
-package nl.bioscoop.mijnbios.utils;
+package nl.bioscoop.biosapi.utils;
 
 import android.Manifest;
 import android.content.Context;
@@ -22,9 +22,9 @@ import okhttp3.ResponseBody;
 public class DataLoader {
     private @NonNull OkHttpClient client;
 
-    public DataLoader(@NonNull Context context){
+    public DataLoader(@NonNull Context context, int maxCacheSizeMB){
         this(new OkHttpClient.Builder()
-                .cache(new Cache(new File(context.getCacheDir(), "http"), 10 * 1024 * 1024))
+                .cache(new Cache(new File(context.getCacheDir(), "http"), maxCacheSizeMB * 1024 * 1024))
                 .build());
     }
 

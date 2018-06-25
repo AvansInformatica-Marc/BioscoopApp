@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import nl.bioscoop.mijnbios.model.movie.MoviePoster;
+import nl.bioscoop.biosapi.model.movie.MoviePoster;
 
 import static nl.bioscoop.mijnbios.utils.Views.inflateLayout;
 

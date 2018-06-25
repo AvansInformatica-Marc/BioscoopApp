@@ -1,4 +1,4 @@
-package nl.bioscoop.mijnbios.model.movie;
+package nl.bioscoop.biosapi.model.movie;
 
 import java.io.Serializable;
 

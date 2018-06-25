@@ -1,4 +1,4 @@
-package nl.bioscoop.mijnbios;
+package nl.bioscoop.biosapi;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,18 +10,18 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import nl.bioscoop.mijnbios.model.movie.MovieDetails;
-import nl.bioscoop.mijnbios.model.movie.MoviePoster;
-import nl.bioscoop.mijnbios.utils.DataLoader;
+import nl.bioscoop.biosapi.model.movie.MovieDetails;
+import nl.bioscoop.biosapi.model.movie.MoviePoster;
+import nl.bioscoop.biosapi.utils.DataLoader;
 
-public class Api {
+public class BiosAPI {
     private @NonNull DataLoader dataLoader;
 
-    public Api(@NonNull DataLoader dataLoader) {
+    public BiosAPI(@NonNull DataLoader dataLoader) {
         this.dataLoader = dataLoader;
     }
 
-    public void getAllMoviePosters(ValueCallback<ArrayList<MoviePoster>> callback){
+    public void getAllMoviePosters(@NonNull ValueCallback<ArrayList<MoviePoster>> callback){
         dataLoader.load("https://mijnbios.herokuapp.com/api/v1/shows/movies?displayType=poster", (responseBody) -> {
             if(responseBody == null) return;
 
@@ -41,7 +41,7 @@ public class Api {
         });
     }
 
-    public void getMovieDetail(int id, ValueCallback<MovieDetails> callback){
+    public void getMovieDetail(int id, @NonNull ValueCallback<MovieDetails> callback){
         dataLoader.load("https://mijnbios.herokuapp.com/api/v1/movies/" + String.valueOf(id) + "?displayType=details", (responseBody) -> {
             if(responseBody == null) return;
 

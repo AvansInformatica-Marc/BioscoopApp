@@ -16,12 +16,13 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import nl.bioscoop.mijnbios.model.movie.MoviePoster;
-import nl.bioscoop.mijnbios.utils.DataLoader;
+import nl.bioscoop.biosapi.BiosAPI;
+import nl.bioscoop.biosapi.model.movie.MoviePoster;
+import nl.bioscoop.biosapi.utils.DataLoader;
 import nl.bioscoop.mijnbios.utils.Views;
 
 public class MovieDetailActivity extends AppCompatActivity {
-    private Api api;
+    private BiosAPI api;
     private LinearLayout detailsList;
 
     @Override @CallSuper protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         loadActionbar();
 
-        api = new Api(new DataLoader(this));
+        api = new BiosAPI(new DataLoader(this, 10));
 
         detailsList = findViewById(R.id.detailsList);
 
