@@ -7,19 +7,33 @@ import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import nl.bioscoop.biosapi.BiosAPI;
+import nl.bioscoop.biosapi.model.MovieShow;
 import nl.bioscoop.biosapi.model.movie.Movie;
 import nl.bioscoop.biosapi.utils.DataLoader;
 
 public class MovieShowPicker extends Activity {
     private BiosAPI api;
+    private ListView items;
+    private ArrayList<MovieShow> movieShows;
 
     @Override @CallSuper protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_show_picker);loadActionbar();
 
         api = new BiosAPI(new DataLoader(this, Config.MAX_CACHE_SIZE_MB), getResources().getString(R.string.languageCode));
+
+        movieShows = new ArrayList<>();
+
+        items = findViewById(R.id.list);
+        items.setAdapter(new MovieShowPickerAdapter(this, movieShows));
+        items.setOnItemClickListener((adapterView, view, i, l) -> {
+            // TODO
+        });
 
         Intent intent = getIntent();
         @Nullable Movie movie = (Movie) intent.getSerializableExtra(Config.EXTRA_MOVIE);
@@ -38,7 +52,9 @@ public class MovieShowPicker extends Activity {
         setTitle(getResources().getString(R.string.book) + " (" + movie.getTitle() + ")");
 
         api.getShowsForMovie(movie.getId(), (list) -> {
-            // TODO
+            movieShows.clear();
+            movieShows.addAll(list);
+            runOnUiThread(((MovieShowPickerAdapter) items.getAdapter())::notifyDataSetChanged);
         });
     }
 }

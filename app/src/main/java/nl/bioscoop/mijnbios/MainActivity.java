@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
         movies = new ArrayList<>();
 
         movieGrid = findViewById(R.id.grid);
-        movieGrid.setAdapter(new MovieAdapter(MainActivity.this, movies));
+        movieGrid.setAdapter(new MovieAdapter(this, movies));
         movieGrid.setOnItemClickListener((adapterView, view, i, l) -> {
             MoviePoster movie = ((MovieAdapter) movieGrid.getAdapter()).getItem(i);
             if(movie != null) {
