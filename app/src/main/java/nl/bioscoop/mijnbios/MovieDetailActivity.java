@@ -81,7 +81,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     public void book(View view){
-        Intent intent = new Intent(this, MovieShowPicker.class);
+        Intent intent = new Intent(this, MovieShowPickerActivity.class);
         intent.putExtra(Config.EXTRA_MOVIE, movie);
         startActivity(intent);
     }

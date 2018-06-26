@@ -23,7 +23,7 @@ public class MovieShowPickerAdapter extends ArrayAdapter<MovieShow> {
     }
 
     @Override @NonNull public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        @NonNull View view = convertView != null ? convertView : inflateLayout(R.layout.show_picker_item, parent);
+        @NonNull View view = convertView != null ? convertView : inflateLayout(R.layout.movie_show_picker_item, parent);
         @Nullable MovieShow movieShow = getItem(position);
 
         if(movieShow == null) {

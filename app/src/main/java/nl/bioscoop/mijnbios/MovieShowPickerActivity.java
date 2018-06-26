@@ -16,7 +16,7 @@ import nl.bioscoop.biosapi.model.MovieShow;
 import nl.bioscoop.biosapi.model.movie.Movie;
 import nl.bioscoop.biosapi.utils.DataLoader;
 
-public class MovieShowPicker extends AppCompatActivity {
+public class MovieShowPickerActivity extends AppCompatActivity {
     private BiosAPI api;
     private ListView items;
     private ArrayList<MovieShow> movieShows;

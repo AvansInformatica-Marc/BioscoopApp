@@ -29,11 +29,12 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MovieShowPicker"
+            android:name=".MovieShowPickerActivity"
             android:configChanges="keyboard|keyboardHidden|mcc|mnc|orientation|screenSize|locale|layoutDirection|smallestScreenSize|screenLayout|uiMode"
             android:label="@string/book"
             android:launchMode="singleTask"
             android:parentActivityName=".MainActivity" />
+        <activity android:name=".TicketConfigActivity"></activity>
     </application>
 
 </manifest>

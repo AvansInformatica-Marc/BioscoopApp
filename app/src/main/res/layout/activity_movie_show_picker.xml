@@ -6,5 +6,5 @@
     android:layout_height="match_parent"
     android:divider="@null"
     android:dividerHeight="0dp"
-    tools:context=".MovieShowPicker"
-    tools:listitem="@layout/show_picker_item" />
+    tools:context=".MovieShowPickerActivity"
+    tools:listitem="@layout/movie_show_picker_item" />
