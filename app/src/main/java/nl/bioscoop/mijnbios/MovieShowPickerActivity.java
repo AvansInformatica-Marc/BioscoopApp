@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
@@ -18,6 +17,7 @@ import nl.bioscoop.biosapi.utils.DataLoader;
 
 public class MovieShowPickerActivity extends AppCompatActivity {
     private BiosAPI api;
+    private Movie movie;
     private ListView items;
     private ArrayList<MovieShow> movieShows;
 
@@ -32,11 +32,15 @@ public class MovieShowPickerActivity extends AppCompatActivity {
         items = findViewById(R.id.list);
         items.setAdapter(new MovieShowPickerAdapter(this, movieShows));
         items.setOnItemClickListener((adapterView, view, i, l) -> {
-            // TODO
+            MovieShow movieShow = ((MovieShowPickerAdapter) adapterView.getAdapter()).getItem(i);
+            Intent intent = new Intent(this, TicketConfigActivity.class);
+            intent.putExtra(Config.EXTRA_MOVIE, movie);
+            intent.putExtra(Config.EXTRA_MOVIESHOW, movieShow);
+            startActivity(intent);
         });
 
         Intent intent = getIntent();
-        @Nullable Movie movie = (Movie) intent.getSerializableExtra(Config.EXTRA_MOVIE);
+        movie = (Movie) intent.getSerializableExtra(Config.EXTRA_MOVIE);
         if(movie != null) loadData(movie);
     }
 
