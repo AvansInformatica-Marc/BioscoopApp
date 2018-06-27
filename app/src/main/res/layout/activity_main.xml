@@ -17,9 +17,9 @@
             android:id="@+id/movieGrid"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingEnd="-1dp"
             android:horizontalSpacing="1dp"
             android:numColumns="3"
+            android:paddingEnd="-1dp"
             android:verticalSpacing="1dp"
             tools:listitem="@layout/movie_griditem" />
 
@@ -41,9 +41,12 @@
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
-        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+        style="@style/Widget.Design.BottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:itemBackground="@color/colorPrimary"
+        app:itemIconTint="@drawable/bottomnavigation_selector"
+        app:itemTextColor="@drawable/bottomnavigation_selector"
         app:menu="@menu/bottom_navigation_menu" />
 
 </LinearLayout>
