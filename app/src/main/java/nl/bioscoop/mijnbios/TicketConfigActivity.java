@@ -6,11 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.util.Locale;
@@ -20,6 +17,8 @@ import nl.bioscoop.biosapi.model.MovieShow;
 import nl.bioscoop.biosapi.model.movie.Movie;
 import nl.bioscoop.biosapi.model.movie.MovieDetails;
 import nl.bioscoop.biosapi.utils.DataLoader;
+import nl.bioscoop.mijnbios.utils.DateTime;
+import nl.bioscoop.mijnbios.utils.Images;
 import nl.bioscoop.mijnbios.utils.Views;
 
 public class TicketConfigActivity extends AppCompatActivity {
@@ -45,16 +44,14 @@ public class TicketConfigActivity extends AppCompatActivity {
         location.setText(movieShow.getLocation());
 
         TextView datetime = findViewById(R.id.datetime);
-        datetime.setText(DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault()).format(movieShow.getDatetime()) + " - " +
-                DateFormat.getTimeInstance(DateFormat.SHORT, Locale.getDefault()).format(movieShow.getDatetime()));
+        datetime.setText(DateTime.format(movieShow.getDatetime(), DateFormat.MEDIUM, DateFormat.SHORT, " - ", true, Locale.getDefault()));
 
         TextView movieTitle = findViewById(R.id.movieTitle);
         movieTitle.setText(movie.getTitle());
 
         if(movie instanceof MovieDetails){
             MovieDetails movieDetails = (MovieDetails) movie;
-            ImageView movieBackdrop = findViewById(R.id.movieBackdrop);
-            Picasso.with(this).load(movieDetails.getBackdrop()).into(movieBackdrop);
+            Images.loadImage(movieDetails.getBackdrop(), findViewById(R.id.movieBackdrop));
         }
     }
 

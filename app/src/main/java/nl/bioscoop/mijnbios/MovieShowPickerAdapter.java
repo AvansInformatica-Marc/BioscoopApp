@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import nl.bioscoop.biosapi.model.MovieShow;
+import nl.bioscoop.mijnbios.utils.DateTime;
 
 import static nl.bioscoop.mijnbios.utils.Views.inflateLayout;
 
@@ -33,8 +34,7 @@ public class MovieShowPickerAdapter extends ArrayAdapter<MovieShow> {
             card.setOnClickListener(view1 -> ((ListView) parent).performItemClick(convertView, position, position));
 
             TextView datetime = view.findViewById(R.id.datetime);
-            datetime.setText(DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault()).format(movieShow.getDatetime()) + " - " +
-                    DateFormat.getTimeInstance(DateFormat.SHORT, Locale.getDefault()).format(movieShow.getDatetime()));
+            datetime.setText(DateTime.format(movieShow.getDatetime(), DateFormat.MEDIUM, DateFormat.SHORT, " - ", true, Locale.getDefault()));
 
             TextView location = view.findViewById(R.id.location);
             location.setText(movieShow.getLocation());

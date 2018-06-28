@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Views {
+public final class Views {
     @NonNull public static <T extends View> T inflateLayout(@LayoutRes int layout, Context context){
         return (T) LayoutInflater.from(context).inflate(layout, null, false);
     }
