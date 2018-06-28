@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import nl.bioscoop.biosapi.model.MovieShow;
@@ -72,7 +73,13 @@ public class BiosAPI {
 
                 for (int i = 0; i < showsList.length(); i++){
                     @Nullable JSONObject show = showsList.optJSONObject(i);
-                    if(show != null) shows.add(new MovieShow(show));
+                    if(show != null) {
+                        try {
+                            shows.add(new MovieShow(show));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
 
                 callback.onReceiveValue(shows);
