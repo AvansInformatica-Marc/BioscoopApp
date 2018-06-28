@@ -13,7 +13,11 @@ public class Movie implements Serializable {
         this.title = title;
     }
 
-    public int getId() {
+    @Deprecated public int getId() {
+        return id;
+    }
+
+    public int getID() {
         return id;
     }
 
