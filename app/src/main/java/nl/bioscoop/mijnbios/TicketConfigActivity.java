@@ -2,10 +2,13 @@ package nl.bioscoop.mijnbios;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.webkit.ValueCallback;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,7 +16,10 @@ import java.text.DateFormat;
 import java.util.Locale;
 
 import nl.bioscoop.biosapi.BiosAPI;
+import nl.bioscoop.biosapi.database.BiosDatabase;
+import nl.bioscoop.biosapi.database.TicketDAO;
 import nl.bioscoop.biosapi.model.MovieShow;
+import nl.bioscoop.biosapi.model.Ticket;
 import nl.bioscoop.biosapi.model.movie.Movie;
 import nl.bioscoop.biosapi.model.movie.MovieDetails;
 import nl.bioscoop.biosapi.utils.DataLoader;
@@ -69,6 +75,20 @@ public class TicketConfigActivity extends AppCompatActivity {
     public void onPaymentConfirmed(View v){
         alertDialog.dismiss();
 
+        Ticket ticket = new Ticket("1", movie, movieShow);
+        TicketDAO ticketDAO = BiosDatabase.getInstance(this).getDB().ticketDAO();
+        async((aVoid) -> {
+            ticketDAO.insert(ticket);
+            Log.e("Tickets", "Amount of tickets:" + ticketDAO.getTickets().size());
+        });
+    }
 
+    public static void async(ValueCallback<Void> async){
+        new AsyncTask<Void, Void, Void>() {
+            @Override protected Void doInBackground(Void... voids) {
+                async.onReceiveValue(null);
+                return null;
+            }
+        }.execute();
     }
 }

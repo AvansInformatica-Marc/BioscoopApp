@@ -19,7 +19,7 @@ public class BiosDatabase {
     private static BiosDatabase INSTANCE = null;
 
     public static BiosDatabase getInstance(@NonNull Context context) {
-        if(INSTANCE == null) new BiosDatabase(context.getApplicationContext());
+        if(INSTANCE == null) INSTANCE = new BiosDatabase(context.getApplicationContext());
         return INSTANCE;
     }
 }

@@ -36,4 +36,8 @@ public class Ticket {
     public Show getShow() {
         return show;
     }
+
+    /* ONLY FOR DATABASE */  public void setId(int id) {
+        this.id = id;
+    }
 }
