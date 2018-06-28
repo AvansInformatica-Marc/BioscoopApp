@@ -21,6 +21,10 @@ public class Ticket {
         this.id = seat.hashCode() * movie.getID() * show.getID();
     }
 
+    public int getId() {
+        return id;
+    }
+
     @NonNull public String getSeat() {
         return seat;
     }

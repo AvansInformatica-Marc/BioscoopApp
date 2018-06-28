@@ -1,5 +1,6 @@
 package nl.bioscoop.biosapi.model;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.support.annotation.NonNull;
 
 import org.json.JSONException;
@@ -12,6 +13,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Show implements Serializable {
+    @ColumnInfo(name = "showID")
     private int id;
     private int hallID;
     private int cinemaID;
@@ -28,12 +30,16 @@ public class Show implements Serializable {
         );
     }
 
-    public Show(int showID, int hallID, int cinemaID, @NonNull String datetime, @NonNull String location) throws ParseException {
+    public Show(int id, int hallID, int cinemaID, @NonNull String datetime, @NonNull String location) throws ParseException {
+        this(id, hallID, cinemaID, new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.UK).parse(datetime), location);
+    }
+
+    public Show(int id, int hallID, int cinemaID, Date datetime, @NonNull String location) {
+        this.id = id;
         this.hallID = hallID;
-        this.id = showID;
         this.cinemaID = cinemaID;
+        this.datetime = datetime;
         this.location = location;
-        this.datetime = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.UK).parse(datetime);
     }
 
     public int getHallID() {
@@ -54,5 +60,13 @@ public class Show implements Serializable {
 
     @NonNull public String getLocation() {
         return location;
+    }
+
+    /* ONLY FOR DATABASE */ public void setDatetime(Date datetime) {
+        this.datetime = datetime;
+    }
+
+    /* ONLY FOR DATABASE */  public int getId() {
+        return getID();
     }
 }
