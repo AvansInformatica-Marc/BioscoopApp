@@ -1,1 +1,1 @@
-include ':app', ':biosapi'
+include ':app', ':biosapi', ':mijnbiosdb'
