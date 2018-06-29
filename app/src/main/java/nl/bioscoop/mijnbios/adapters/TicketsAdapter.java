@@ -8,9 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import nl.bioscoop.biosapi.model.Ticket;
+import nl.bioscoop.mijnbios.R;
+import nl.bioscoop.mijnbios.utils.DateTime;
 
 import static nl.bioscoop.mijnbios.utils.Views.inflateLayout;
 
@@ -20,14 +24,25 @@ public class TicketsAdapter extends ArrayAdapter<Ticket> {
     }
 
     @Override @NonNull public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        @NonNull TextView view = convertView != null && convertView instanceof TextView ? (TextView) convertView : inflateLayout(android.R.layout.simple_list_item_1, parent);
+        @NonNull View view = convertView != null ? convertView : inflateLayout(R.layout.ticket, parent);
         @Nullable Ticket ticket = getItem(position);
 
         if(ticket == null) {
             view.setVisibility(View.GONE);
         } else {
             view.setVisibility(View.VISIBLE);
-            view.setText(ticket.getSeat() + ") " + ticket.getMovie().getTitle());
+
+            TextView seat = view.findViewById(R.id.seat);
+            seat.setText(ticket.getSeat());
+
+            TextView movieTitle = view.findViewById(R.id.movieTitle);
+            movieTitle.setText(ticket.getMovie().getTitle());
+
+            TextView datetime = view.findViewById(R.id.datetime);
+            datetime.setText(DateTime.format(ticket.getShow().getDatetime(), DateFormat.MEDIUM, DateFormat.SHORT, " - ", true, Locale.getDefault()));
+
+            TextView location = view.findViewById(R.id.location);
+            location.setText(ticket.getShow().getLocation());
         }
 
         return view;
