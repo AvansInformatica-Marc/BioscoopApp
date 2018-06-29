@@ -1,3 +1,3 @@
 # BioscoopApp
 Dit is een biscoop applicatie.
-Deze zal
+Deze zal gemaa
