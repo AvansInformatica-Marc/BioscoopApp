@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -77,11 +76,6 @@ public class TicketConfigActivity extends AppCompatActivity {
 
         Ticket ticket = new Ticket("1", movie, movieShow);
         TicketDAO ticketDAO = BiosDatabase.getInstance(this).getDB().ticketDAO();
-        async(() -> {
-            ticketDAO.insert(ticket);
-            return ticketDAO.getTickets().size();
-        }, (amountOfTickets) -> {
-            Log.e("TicketAmount", "Amount: " + amountOfTickets);
-        });
+        async(() -> ticketDAO.insert(ticket));
     }
 }
