@@ -8,13 +8,18 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import nl.bioscoop.biosapi.BiosAPI;
+import nl.bioscoop.biosapi.database.BiosDatabase;
+import nl.bioscoop.biosapi.database.TicketDAO;
 import nl.bioscoop.biosapi.model.Ticket;
 import nl.bioscoop.biosapi.model.movie.MoviePoster;
 import nl.bioscoop.biosapi.utils.DataLoader;
+
+import static nl.bioscoop.mijnbios.utils.Async.async;
 
 public class MainActivity extends AppCompatActivity {
     private BiosAPI api;
@@ -125,8 +130,8 @@ public class MainActivity extends AppCompatActivity {
         public TicketsTab(){
             super(R.id.ticketsList);
 
-            /*listView.setAdapter(new TicketsAdapter(MainActivity.this, list));
-            listView.setOnItemClickListener((adapterView, view, i, l) -> {
+            listView.setAdapter(new TicketsAdapter(MainActivity.this, list));
+            /*listView.setOnItemClickListener((adapterView, view, i, l) -> {
                 Ticket ticket = ((TicketsAdapter) listView.getAdapter()).getItem(i);
                 if(ticket != null) {
                     Intent intent = new Intent(MainActivity.this, TicketActivity.class);
@@ -137,13 +142,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public void loadData(){
-            /*swipeRefreshLayout.setRefreshing(true);
-            db.getAllTickets((ticketsList) -> {
+            swipeRefreshLayout.setRefreshing(true);
+            TicketDAO ticketDAO = BiosDatabase.getInstance(MainActivity.this).getDB().ticketDAO();
+            async(ticketDAO::getTickets, (tickets) -> {
                 list.clear();
-                list.addAll(ticketsList);
+                list.addAll(tickets);
+                Toast.makeText(MainActivity.this, "Amount: " + list.size(), Toast.LENGTH_LONG).show();
                 runOnUiThread(((TicketsAdapter) listView.getAdapter())::notifyDataSetChanged);
                 swipeRefreshLayout.setRefreshing(false);
-            });*/
+            });
         }
     }
 }
