@@ -3,7 +3,7 @@ package nl.bioscoop.mijnbios.utils;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 
-public class Async {
+public final class Async {
     public static <T> void async(FunctionNoParams<T> async){
         async(async, null);
     }
