@@ -112,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
     class LocationsTab extends Tab<Object> {
         public LocationsTab(){
             super(R.id.locationsList);
+
+            listView.setAdapter(new LocationAdapter(MainActivity.this, list));
         }
 
         public void loadData(){
