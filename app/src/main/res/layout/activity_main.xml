@@ -13,29 +13,37 @@
         android:layout_weight="1"
         tools:context=".MainActivity">
 
-        <GridView
-            android:id="@+id/movieGrid"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:horizontalSpacing="1dp"
-            android:numColumns="3"
-            android:paddingEnd="-1dp"
-            android:verticalSpacing="1dp"
-            tools:listitem="@layout/movie_griditem" />
+            android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/locationsList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@null"
-            android:dividerHeight="0dp" />
+            <GridView
+                android:id="@+id/movieGrid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:horizontalSpacing="1dp"
+                android:numColumns="3"
+                android:paddingEnd="-1dp"
+                android:verticalSpacing="1dp"
+                tools:listitem="@layout/movie_griditem" />
 
-        <ListView
-            android:id="@+id/ticketsList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@null"
-            android:dividerHeight="0dp" />
+            <ListView
+                android:id="@+id/locationsList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:visibility="gone" />
+
+            <ListView
+                android:id="@+id/ticketsList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:visibility="gone" />
+
+        </FrameLayout>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
