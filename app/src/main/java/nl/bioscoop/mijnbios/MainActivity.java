@@ -18,6 +18,8 @@ import nl.bioscoop.biosapi.database.TicketDAO;
 import nl.bioscoop.biosapi.model.Ticket;
 import nl.bioscoop.biosapi.model.movie.MoviePoster;
 import nl.bioscoop.biosapi.utils.DataLoader;
+import nl.bioscoop.mijnbios.adapters.MovieAdapter;
+import nl.bioscoop.mijnbios.adapters.TicketsAdapter;
 
 import static nl.bioscoop.mijnbios.utils.Async.async;
 

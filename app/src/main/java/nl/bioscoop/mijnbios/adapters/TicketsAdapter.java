@@ -1,4 +1,4 @@
-package nl.bioscoop.mijnbios;
+package nl.bioscoop.mijnbios.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

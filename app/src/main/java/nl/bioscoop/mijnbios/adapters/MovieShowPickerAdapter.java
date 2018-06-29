@@ -1,4 +1,4 @@
-package nl.bioscoop.mijnbios;
+package nl.bioscoop.mijnbios.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import nl.bioscoop.biosapi.model.MovieShow;
+import nl.bioscoop.mijnbios.R;
 import nl.bioscoop.mijnbios.utils.DateTime;
 
 import static nl.bioscoop.mijnbios.utils.Views.inflateLayout;
