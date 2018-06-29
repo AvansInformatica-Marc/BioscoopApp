@@ -129,16 +129,7 @@ public class MainActivity extends AppCompatActivity {
     class TicketsTab extends Tab<Ticket> {
         public TicketsTab(){
             super(R.id.ticketsList);
-
             listView.setAdapter(new TicketsAdapter(MainActivity.this, list));
-            /*listView.setOnItemClickListener((adapterView, view, i, l) -> {
-                Ticket ticket = ((TicketsAdapter) listView.getAdapter()).getItem(i);
-                if(ticket != null) {
-                    Intent intent = new Intent(MainActivity.this, TicketActivity.class);
-                    intent.putExtra(Config.EXTRA_TICKET, ticket);
-                    startActivity(intent);
-                }
-            });*/
         }
 
         public void loadData(){
