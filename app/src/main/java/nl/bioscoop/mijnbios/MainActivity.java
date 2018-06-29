@@ -12,6 +12,7 @@ import android.widget.AbsListView;
 import java.util.ArrayList;
 
 import nl.bioscoop.biosapi.BiosAPI;
+import nl.bioscoop.biosapi.model.Ticket;
 import nl.bioscoop.biosapi.model.movie.MoviePoster;
 import nl.bioscoop.biosapi.utils.DataLoader;
 
@@ -112,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
     class LocationsTab extends Tab<Object> {
         public LocationsTab(){
             super(R.id.locationsList);
+            // TODO
         }
 
         public void loadData(){
@@ -119,13 +121,29 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    class TicketsTab extends Tab<Object> {
+    class TicketsTab extends Tab<Ticket> {
         public TicketsTab(){
             super(R.id.ticketsList);
+
+            /*listView.setAdapter(new TicketsAdapter(MainActivity.this, list));
+            listView.setOnItemClickListener((adapterView, view, i, l) -> {
+                Ticket ticket = ((TicketsAdapter) listView.getAdapter()).getItem(i);
+                if(ticket != null) {
+                    Intent intent = new Intent(MainActivity.this, TicketActivity.class);
+                    intent.putExtra(Config.EXTRA_TICKET, ticket);
+                    startActivity(intent);
+                }
+            });*/
         }
 
         public void loadData(){
-            // TODO
+            /*swipeRefreshLayout.setRefreshing(true);
+            db.getAllTickets((ticketsList) -> {
+                list.clear();
+                list.addAll(ticketsList);
+                runOnUiThread(((TicketsAdapter) listView.getAdapter())::notifyDataSetChanged);
+                swipeRefreshLayout.setRefreshing(false);
+            });*/
         }
     }
 }
