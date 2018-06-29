@@ -1,2 +1,3 @@
 # BioscoopApp
-dit is een biscoop applicatie.
+Dit is een biscoop applicatie.
+Deze
