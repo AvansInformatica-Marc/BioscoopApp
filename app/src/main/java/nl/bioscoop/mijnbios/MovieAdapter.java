@@ -27,6 +27,7 @@ public class MovieAdapter extends ArrayAdapter<MoviePoster> {
         if(movie == null) {
             view.setVisibility(View.GONE);
         } else {
+            view.setVisibility(View.VISIBLE);
             TextView movieTitle = view.findViewById(R.id.title);
             movieTitle.setText(movie.getTitle());
 
