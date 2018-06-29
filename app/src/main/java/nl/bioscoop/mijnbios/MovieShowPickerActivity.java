@@ -14,6 +14,7 @@ import nl.bioscoop.biosapi.BiosAPI;
 import nl.bioscoop.biosapi.model.MovieShow;
 import nl.bioscoop.biosapi.model.movie.Movie;
 import nl.bioscoop.biosapi.utils.DataLoader;
+import nl.bioscoop.mijnbios.adapters.MovieShowPickerAdapter;
 
 public class MovieShowPickerActivity extends AppCompatActivity {
     private BiosAPI api;
