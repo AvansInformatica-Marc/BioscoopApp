@@ -30,6 +30,7 @@ public class MovieShowPickerAdapter extends ArrayAdapter<MovieShow> {
         if(movieShow == null) {
             view.setVisibility(View.GONE);
         } else {
+            view.setVisibility(View.VISIBLE);
             View card = view.findViewById(R.id.card);
             card.setOnClickListener(view1 -> ((ListView) parent).performItemClick(convertView, position, position));
 
