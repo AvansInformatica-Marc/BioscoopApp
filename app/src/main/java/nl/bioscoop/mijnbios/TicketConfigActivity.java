@@ -2,13 +2,11 @@ package nl.bioscoop.mijnbios;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.webkit.ValueCallback;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,6 +24,8 @@ import nl.bioscoop.biosapi.utils.DataLoader;
 import nl.bioscoop.mijnbios.utils.DateTime;
 import nl.bioscoop.mijnbios.utils.Images;
 import nl.bioscoop.mijnbios.utils.Views;
+
+import static nl.bioscoop.mijnbios.utils.Async.async;
 
 public class TicketConfigActivity extends AppCompatActivity {
     private BiosAPI api;
@@ -77,18 +77,11 @@ public class TicketConfigActivity extends AppCompatActivity {
 
         Ticket ticket = new Ticket("1", movie, movieShow);
         TicketDAO ticketDAO = BiosDatabase.getInstance(this).getDB().ticketDAO();
-        async((aVoid) -> {
+        async(() -> {
             ticketDAO.insert(ticket);
-            Log.e("Tickets", "Amount of tickets:" + ticketDAO.getTickets().size());
+            return ticketDAO.getTickets().size();
+        }, (amountOfTickets) -> {
+            Log.e("TicketAmount", "Amount: " + amountOfTickets);
         });
-    }
-
-    public static void async(ValueCallback<Void> async){
-        new AsyncTask<Void, Void, Void>() {
-            @Override protected Void doInBackground(Void... voids) {
-                async.onReceiveValue(null);
-                return null;
-            }
-        }.execute();
     }
 }
