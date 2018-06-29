@@ -20,6 +20,13 @@ public class Async {
         }.execute();
     }
 
+    public static void async(SimpleFunction async){
+        async(() -> {
+            async.invoke();
+            return null;
+        }, null);
+    }
+
     public interface Function<P, R> {
         R invoke(P p);
     }
