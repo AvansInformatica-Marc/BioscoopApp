@@ -54,7 +54,7 @@ public class MovieShowPickerActivity extends AppCompatActivity {
     }
 
     private void loadData(@NonNull Movie movie){
-        setTitle(getResources().getString(R.string.book) + " (" + movie.getTitle() + ")");
+        setTitle(getResources().getString(R.string.buyTickets) + " (" + movie.getTitle() + ")");
 
         api.getShowsForMovie(movie.getId(), (list) -> {
             movieShows.clear();

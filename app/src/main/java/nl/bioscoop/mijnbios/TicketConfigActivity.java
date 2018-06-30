@@ -66,9 +66,10 @@ public class TicketConfigActivity extends AppCompatActivity {
         TextView title = dummyPaymentView.findViewById(R.id.title);
         title.setText("Movie tickets (" + getString(R.string.app_name) + ")");
 
-        alertDialog = new AlertDialog.Builder(this)
-                .setView(dummyPaymentView)
-                .show();
+        TextView price = dummyPaymentView.findViewById(R.id.price);
+        price.setText("€5,-");
+
+        alertDialog = new AlertDialog.Builder(this).setView(dummyPaymentView).show();
     }
 
     public void onPaymentConfirmed(View v){

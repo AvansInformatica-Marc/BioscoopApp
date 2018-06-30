@@ -47,14 +47,21 @@
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        style="@style/Widget.Design.BottomNavigationView"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="@drawable/bottomnavigation_selector"
-        app:itemTextColor="@drawable/bottomnavigation_selector"
-        app:menu="@menu/bottom_navigation_menu" />
+        android:background="@color/colorPrimary">
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            style="@style/Widget.Design.BottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemBackground="@color/colorPrimary"
+            app:itemIconTint="@drawable/bottomnavigation_selector"
+            app:itemTextColor="@drawable/bottomnavigation_selector"
+            app:menu="@menu/bottom_navigation_menu" />
+        
+    </FrameLayout>
 
 </LinearLayout>

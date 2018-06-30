@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorAccent"
             android:onClick="book"
-            android:text="@string/book" />
+            android:text="@string/buyTickets" />
 
         <include layout="@layout/divider" />
 
