@@ -13,4 +13,5 @@
     <string name="selectedMovie">Selected movie:</string>
     <string name="ticketAmount">Amount of tickets:</string>
     <string name="buy">Buy</string>
+    <string name="dummyPaymentText">By clicking \'buy\', you agree to the terms of service.</string>
 </resources>

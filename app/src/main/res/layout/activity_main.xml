@@ -61,7 +61,7 @@
             app:itemIconTint="@drawable/bottomnavigation_selector"
             app:itemTextColor="@drawable/bottomnavigation_selector"
             app:menu="@menu/bottom_navigation_menu" />
-        
+
     </FrameLayout>
 
 </LinearLayout>

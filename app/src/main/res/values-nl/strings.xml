@@ -14,4 +14,5 @@
     <string name="selectedMovie">Geselecteerde film:</string>
     <string name="ticketAmount">Hoeveelheid kaartjes:</string>
     <string name="buy">Kopen</string>
+    <string name="dummyPaymentText">Door op \'kopen\' te klikken, accepteer je de servicevoorwaarden.</string>
 </resources>
