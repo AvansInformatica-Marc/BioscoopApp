@@ -16,7 +16,7 @@ import nl.bioscoop.biosapi.model.movie.Movie;
 import nl.bioscoop.biosapi.utils.DataLoader;
 import nl.bioscoop.mijnbios.adapters.MovieShowPickerAdapter;
 
-public class MovieShowPickerActivity extends AppCompatActivity {
+public class ShowPickerActivity extends AppCompatActivity {
     private BiosAPI api;
     private Movie movie;
     private ListView items;
@@ -24,7 +24,7 @@ public class MovieShowPickerActivity extends AppCompatActivity {
 
     @Override @CallSuper protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_show_picker);loadActionbar();
+        setContentView(R.layout.activity_show_picker);loadActionbar();
 
         api = new BiosAPI(new DataLoader(this, Config.MAX_CACHE_SIZE_MB), getResources().getString(R.string.languageCode));
 
