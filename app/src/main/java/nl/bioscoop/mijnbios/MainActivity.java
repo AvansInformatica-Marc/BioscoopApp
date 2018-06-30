@@ -149,7 +149,6 @@ public class MainActivity extends AppCompatActivity {
             async(ticketDAO::getTickets, (tickets) -> {
                 list.clear();
                 list.addAll(tickets);
-                Toast.makeText(MainActivity.this, "Amount: " + list.size(), Toast.LENGTH_LONG).show();
                 runOnUiThread(((TicketsAdapter) listView.getAdapter())::notifyDataSetChanged);
                 swipeRefreshLayout.setRefreshing(false);
             });
