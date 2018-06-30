@@ -1,6 +1,7 @@
 package nl.bioscoop.mijnbios;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.design.widget.BottomNavigationView;
@@ -8,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.GridView;
 
 import java.util.ArrayList;
 
@@ -62,6 +64,16 @@ public class MainActivity extends AppCompatActivity {
         tabs[2].onHide();
 
         tabs[position].onShow();
+    }
+
+    @Override public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        AbsListView listView = tabs[0].listView;
+        if(listView != null && listView instanceof GridView){
+            GridView gridView = (GridView) listView;
+            gridView.setNumColumns(getResources().getInteger(R.integer.numColumns));
+        }
     }
 
     abstract class Tab<T> {
