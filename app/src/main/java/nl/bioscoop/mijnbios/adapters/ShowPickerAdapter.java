@@ -13,22 +13,22 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import nl.bioscoop.biosapi.model.MovieShow;
+import nl.bioscoop.biosapi.model.Show;
 import nl.bioscoop.mijnbios.R;
 import nl.bioscoop.mijnbios.utils.DateTime;
 
 import static nl.bioscoop.mijnbios.utils.Views.inflateLayout;
 
-public class MovieShowPickerAdapter extends ArrayAdapter<MovieShow> {
-    public MovieShowPickerAdapter(@NonNull Context context, @NonNull ArrayList<MovieShow> list){
+public class ShowPickerAdapter extends ArrayAdapter<Show> {
+    public ShowPickerAdapter(@NonNull Context context, @NonNull ArrayList<Show> list){
         super(context, 0, list);
     }
 
     @Override @NonNull public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         @NonNull View view = convertView != null ? convertView : inflateLayout(R.layout.activity_show_picker_item, parent);
-        @Nullable MovieShow movieShow = getItem(position);
+        @Nullable Show show = getItem(position);
 
-        if(movieShow == null) {
+        if(show == null) {
             view.setVisibility(View.GONE);
         } else {
             view.setVisibility(View.VISIBLE);
@@ -36,10 +36,10 @@ public class MovieShowPickerAdapter extends ArrayAdapter<MovieShow> {
             card.setOnClickListener(view1 -> ((ListView) parent).performItemClick(convertView, position, position));
 
             TextView datetime = view.findViewById(R.id.datetime);
-            datetime.setText(DateTime.format(movieShow.getDatetime(), DateFormat.MEDIUM, DateFormat.SHORT, " - ", true, Locale.getDefault()));
+            datetime.setText(DateTime.format(show.getDatetime(), DateFormat.MEDIUM, DateFormat.SHORT, " - ", true, Locale.getDefault()));
 
             TextView location = view.findViewById(R.id.location);
-            location.setText(movieShow.getLocation());
+            location.setText(show.getLocation());
         }
 
         return view;

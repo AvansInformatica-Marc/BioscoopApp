@@ -15,7 +15,7 @@ import java.util.Locale;
 import nl.bioscoop.biosapi.BiosAPI;
 import nl.bioscoop.biosapi.database.BiosDatabase;
 import nl.bioscoop.biosapi.database.TicketDAO;
-import nl.bioscoop.biosapi.model.MovieShow;
+import nl.bioscoop.biosapi.model.Show;
 import nl.bioscoop.biosapi.model.Ticket;
 import nl.bioscoop.biosapi.model.movie.Movie;
 import nl.bioscoop.biosapi.model.movie.MovieDetails;
@@ -29,7 +29,7 @@ import static nl.bioscoop.mijnbios.utils.Async.async;
 public class TicketConfigActivity extends AppCompatActivity {
     private BiosAPI api;
     private Movie movie;
-    private MovieShow movieShow;
+    private Show show;
     private AlertDialog alertDialog;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +40,16 @@ public class TicketConfigActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         movie = (Movie) intent.getSerializableExtra(Config.EXTRA_MOVIE);
-        movieShow = (MovieShow) intent.getSerializableExtra(Config.EXTRA_MOVIESHOW);
-        if(movie != null && movieShow != null) loadData(movie, movieShow);
+        show = (Show) intent.getSerializableExtra(Config.EXTRA_SHOW);
+        if(movie != null && show != null) loadData(movie, show);
     }
 
-    public void loadData(@NonNull Movie movie, @NonNull MovieShow movieShow){
+    public void loadData(@NonNull Movie movie, @NonNull Show show){
         TextView location = findViewById(R.id.location);
-        location.setText(movieShow.getLocation());
+        location.setText(show.getLocation());
 
         TextView datetime = findViewById(R.id.datetime);
-        datetime.setText(DateTime.format(movieShow.getDatetime(), DateFormat.MEDIUM, DateFormat.SHORT, " - ", true, Locale.getDefault()));
+        datetime.setText(DateTime.format(show.getDatetime(), DateFormat.MEDIUM, DateFormat.SHORT, " - ", true, Locale.getDefault()));
 
         TextView movieTitle = findViewById(R.id.movieTitle);
         movieTitle.setText(movie.getTitle());
@@ -75,7 +75,7 @@ public class TicketConfigActivity extends AppCompatActivity {
     public void onPaymentConfirmed(View v){
         alertDialog.dismiss();
 
-        Ticket ticket = new Ticket("1", movie, movieShow);
+        Ticket ticket = new Ticket("1", movie, show);
         TicketDAO ticketDAO = BiosDatabase.getInstance(this).getDB().ticketDAO();
         async(() -> ticketDAO.insert(ticket));
     }

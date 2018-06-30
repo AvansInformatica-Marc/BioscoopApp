@@ -11,16 +11,16 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import nl.bioscoop.biosapi.BiosAPI;
-import nl.bioscoop.biosapi.model.MovieShow;
+import nl.bioscoop.biosapi.model.Show;
 import nl.bioscoop.biosapi.model.movie.Movie;
 import nl.bioscoop.biosapi.utils.DataLoader;
-import nl.bioscoop.mijnbios.adapters.MovieShowPickerAdapter;
+import nl.bioscoop.mijnbios.adapters.ShowPickerAdapter;
 
 public class ShowPickerActivity extends AppCompatActivity {
     private BiosAPI api;
     private Movie movie;
     private ListView items;
-    private ArrayList<MovieShow> movieShows;
+    private ArrayList<Show> shows;
 
     @Override @CallSuper protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,15 +28,15 @@ public class ShowPickerActivity extends AppCompatActivity {
 
         api = new BiosAPI(new DataLoader(this, Config.MAX_CACHE_SIZE_MB), getResources().getString(R.string.languageCode));
 
-        movieShows = new ArrayList<>();
+        shows = new ArrayList<>();
 
         items = findViewById(R.id.list);
-        items.setAdapter(new MovieShowPickerAdapter(this, movieShows));
+        items.setAdapter(new ShowPickerAdapter(this, shows));
         items.setOnItemClickListener((adapterView, view, i, l) -> {
-            MovieShow movieShow = ((MovieShowPickerAdapter) adapterView.getAdapter()).getItem(i);
+            Show show = ((ShowPickerAdapter) adapterView.getAdapter()).getItem(i);
             Intent intent = new Intent(this, TicketConfigActivity.class);
             intent.putExtra(Config.EXTRA_MOVIE, movie);
-            intent.putExtra(Config.EXTRA_MOVIESHOW, movieShow);
+            intent.putExtra(Config.EXTRA_SHOW, show);
             startActivity(intent);
         });
 
@@ -56,10 +56,10 @@ public class ShowPickerActivity extends AppCompatActivity {
     private void loadData(@NonNull Movie movie){
         setTitle(getResources().getString(R.string.buyTickets) + " (" + movie.getTitle() + ")");
 
-        api.getShowsForMovie(movie.getId(), (list) -> {
-            movieShows.clear();
-            movieShows.addAll(list);
-            runOnUiThread(((MovieShowPickerAdapter) items.getAdapter())::notifyDataSetChanged);
+        api.getShowsForMovie(movie.getID(), (list) -> {
+            shows.clear();
+            shows.addAll(list);
+            runOnUiThread(((ShowPickerAdapter) items.getAdapter())::notifyDataSetChanged);
         });
     }
 }
