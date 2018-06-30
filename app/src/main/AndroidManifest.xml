@@ -30,7 +30,7 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MovieShowPickerActivity"
+            android:name=".ShowPickerActivity"
             android:configChanges="keyboard|keyboardHidden|mcc|mnc|orientation|screenSize|locale|layoutDirection|smallestScreenSize|screenLayout|uiMode"
             android:label="@string/buyTickets"
             android:launchMode="singleTask"

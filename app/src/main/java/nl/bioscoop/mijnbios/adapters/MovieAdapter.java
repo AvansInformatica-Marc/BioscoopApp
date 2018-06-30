@@ -22,7 +22,7 @@ public class MovieAdapter extends ArrayAdapter<MoviePoster> {
     }
 
     @Override @NonNull public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        @NonNull View view = convertView != null ? convertView : inflateLayout(R.layout.movie_griditem, parent);
+        @NonNull View view = convertView != null ? convertView : inflateLayout(R.layout.activity_main_movie_item, parent);
         @Nullable MoviePoster movie = getItem(position);
 
         if(movie == null) {

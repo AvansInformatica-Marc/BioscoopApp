@@ -74,7 +74,7 @@
             android:text="@string/selectedShow"
             android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
-        <include layout="@layout/movie_show_picker_item" />
+        <include layout="@layout/activity_show_picker_item" />
 
         <include layout="@layout/divider" />
 

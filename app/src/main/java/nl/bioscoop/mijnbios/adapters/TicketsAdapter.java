@@ -24,7 +24,7 @@ public class TicketsAdapter extends ArrayAdapter<Ticket> {
     }
 
     @Override @NonNull public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        @NonNull View view = convertView != null ? convertView : inflateLayout(R.layout.ticket, parent);
+        @NonNull View view = convertView != null ? convertView : inflateLayout(R.layout.activity_main_ticket_item, parent);
         @Nullable Ticket ticket = getItem(position);
 
         if(ticket == null) {

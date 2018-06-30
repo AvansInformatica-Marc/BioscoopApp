@@ -64,7 +64,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     private RelativeLayout generateDetailView(@NonNull String title, @NonNull String content, @Nullable Integer imageResource){
-        RelativeLayout descriptionView = Views.inflateLayout(R.layout.movie_content_item, detailsList);
+        RelativeLayout descriptionView = Views.inflateLayout(R.layout.activity_movie_detail_item, detailsList);
 
         ImageView icon = descriptionView.findViewById(R.id.icon);
         if(imageResource != null) icon.setImageResource(imageResource);
@@ -80,7 +80,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     public void book(View view){
-        Intent intent = new Intent(this, MovieShowPickerActivity.class);
+        Intent intent = new Intent(this, ShowPickerActivity.class);
         intent.putExtra(Config.EXTRA_MOVIE, movie);
         startActivity(intent);
     }
