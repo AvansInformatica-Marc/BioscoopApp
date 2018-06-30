@@ -1,10 +1,12 @@
 package nl.bioscoop.biosapi.model.movie;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
 public class Movie implements Serializable {
+    @ColumnInfo(name = "movieID")
     private int id;
     private @NonNull String title;
 
@@ -13,7 +15,11 @@ public class Movie implements Serializable {
         this.title = title;
     }
 
-    public int getId() {
+    @Deprecated public int getId() {
+        return id;
+    }
+
+    public int getID() {
         return id;
     }
 

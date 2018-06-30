@@ -15,7 +15,8 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="keyboard|keyboardHidden|mcc|mnc|orientation|screenSize|locale|layoutDirection|smallestScreenSize|screenLayout|uiMode"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.BottomNavigationBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,11 +30,17 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MovieShowPicker"
+            android:name=".MovieShowPickerActivity"
             android:configChanges="keyboard|keyboardHidden|mcc|mnc|orientation|screenSize|locale|layoutDirection|smallestScreenSize|screenLayout|uiMode"
-            android:label="@string/book"
+            android:label="@string/buyTickets"
             android:launchMode="singleTask"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MovieDetailActivity" />
+        <activity
+            android:name=".TicketConfigActivity"
+            android:configChanges="keyboard|keyboardHidden|mcc|mnc|orientation|screenSize|locale|layoutDirection|smallestScreenSize|screenLayout|uiMode"
+            android:label="@string/buyTickets"
+            android:launchMode="singleTask"
+            android:parentActivityName=".MovieDetailActivity" />
     </application>
 
 </manifest>

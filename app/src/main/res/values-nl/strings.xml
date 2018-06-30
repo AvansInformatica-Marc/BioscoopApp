@@ -8,4 +8,11 @@
     <string name="locations">Locaties</string>
     <string name="tickets">Kaartjes</string>
     <string name="movies">Films</string>
+    <string name="buyTickets">Koop kaartje(s)</string>
+    <string name="totalPrice">Totale prijs</string>
+    <string name="selectedShow">Geselecteerde weergave</string>
+    <string name="selectedMovie">Geselecteerde film:</string>
+    <string name="ticketAmount">Hoeveelheid kaartjes:</string>
+    <string name="buy">Kopen</string>
+    <string name="dummyPaymentText">Door op \'kopen\' te klikken, accepteer je de servicevoorwaarden.</string>
 </resources>

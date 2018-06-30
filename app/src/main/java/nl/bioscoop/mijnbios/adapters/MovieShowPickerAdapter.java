@@ -1,4 +1,4 @@
-package nl.bioscoop.mijnbios;
+package nl.bioscoop.mijnbios.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import nl.bioscoop.biosapi.model.MovieShow;
+import nl.bioscoop.mijnbios.R;
+import nl.bioscoop.mijnbios.utils.DateTime;
 
 import static nl.bioscoop.mijnbios.utils.Views.inflateLayout;
 
@@ -23,18 +25,18 @@ public class MovieShowPickerAdapter extends ArrayAdapter<MovieShow> {
     }
 
     @Override @NonNull public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        @NonNull View view = convertView != null ? convertView : inflateLayout(R.layout.show_picker_item, parent);
+        @NonNull View view = convertView != null ? convertView : inflateLayout(R.layout.movie_show_picker_item, parent);
         @Nullable MovieShow movieShow = getItem(position);
 
         if(movieShow == null) {
             view.setVisibility(View.GONE);
         } else {
+            view.setVisibility(View.VISIBLE);
             View card = view.findViewById(R.id.card);
             card.setOnClickListener(view1 -> ((ListView) parent).performItemClick(convertView, position, position));
 
             TextView datetime = view.findViewById(R.id.datetime);
-            datetime.setText(DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault()).format(movieShow.getDatetime()) + " - " +
-                    DateFormat.getTimeInstance(DateFormat.SHORT, Locale.getDefault()).format(movieShow.getDatetime()));
+            datetime.setText(DateTime.format(movieShow.getDatetime(), DateFormat.MEDIUM, DateFormat.SHORT, " - ", true, Locale.getDefault()));
 
             TextView location = view.findViewById(R.id.location);
             location.setText(movieShow.getLocation());

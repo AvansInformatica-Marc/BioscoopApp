@@ -13,11 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import nl.bioscoop.biosapi.BiosAPI;
 import nl.bioscoop.biosapi.model.movie.Movie;
 import nl.bioscoop.biosapi.utils.DataLoader;
+import nl.bioscoop.mijnbios.utils.Images;
 import nl.bioscoop.mijnbios.utils.Views;
 
 public class MovieDetailActivity extends AppCompatActivity {
@@ -58,7 +57,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             this.movie = movie;
             if(actionBar != null) actionBar.setTitle(movie.getTitle());
 
-            Picasso.with(this).load(movie.getBackdrop()).into((ImageView) findViewById(R.id.actionBarImage));
+            Images.loadImage(movie.getBackdrop(), findViewById(R.id.actionBarImage));
 
             detailsList.addView(generateDetailView(getResources().getString(R.string.description), movie.getDescription(), R.drawable.ic_info));
         }));
@@ -81,7 +80,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     public void book(View view){
-        Intent intent = new Intent(this, MovieShowPicker.class);
+        Intent intent = new Intent(this, MovieShowPickerActivity.class);
         intent.putExtra(Config.EXTRA_MOVIE, movie);
         startActivity(intent);
     }
