@@ -36,13 +36,13 @@ public class TicketsAdapter extends ArrayAdapter<Ticket> {
             seat.setText(ticket.getSeat());
 
             TextView movieTitle = view.findViewById(R.id.movieTitle);
-            movieTitle.setText(ticket.getMovie().getTitle());
+            movieTitle.setText(ticket.getShow().getMovie().getTitle());
 
             TextView datetime = view.findViewById(R.id.datetime);
             datetime.setText(DateTime.format(ticket.getShow().getDatetime(), DateFormat.MEDIUM, DateFormat.SHORT, " - ", true, Locale.getDefault()));
 
             TextView location = view.findViewById(R.id.location);
-            location.setText(ticket.getShow().getLocation());
+            location.setText(ticket.getShow().getHall().getCinema().getLocation().toShortString());
         }
 
         return view;

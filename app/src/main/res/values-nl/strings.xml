@@ -15,4 +15,6 @@
     <string name="ticketAmount">Hoeveelheid kaartjes:</string>
     <string name="buy">Kopen</string>
     <string name="dummyPaymentText">Door op \'kopen\' te klikken, accepteer je de servicevoorwaarden.</string>
+    <string name="loading">Aan het laden…</string>
+    <string name="movieTickets">Filmkaartjes</string>
 </resources>

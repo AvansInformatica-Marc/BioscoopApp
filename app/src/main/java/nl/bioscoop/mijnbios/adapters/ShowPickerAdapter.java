@@ -39,7 +39,7 @@ public class ShowPickerAdapter extends ArrayAdapter<Show> {
             datetime.setText(DateTime.format(show.getDatetime(), DateFormat.MEDIUM, DateFormat.SHORT, " - ", true, Locale.getDefault()));
 
             TextView location = view.findViewById(R.id.location);
-            location.setText(show.getLocation());
+            location.setText(show.getHall().getCinema().getLocation().toShortString());
         }
 
         return view;

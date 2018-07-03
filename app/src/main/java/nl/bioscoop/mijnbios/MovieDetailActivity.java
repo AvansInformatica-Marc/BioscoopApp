@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import nl.bioscoop.biosapi.BiosAPI;
-import nl.bioscoop.biosapi.model.movie.Movie;
+import nl.bioscoop.biosapi.model.Movie;
 import nl.bioscoop.biosapi.utils.DataLoader;
 import nl.bioscoop.mijnbios.utils.Images;
 import nl.bioscoop.mijnbios.utils.Views;
@@ -36,7 +36,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         movie = (Movie) intent.getSerializableExtra(Config.EXTRA_MOVIE);
-        if(movie != null) loadMovieData(movie);
+        if(movie != null) loadMovieData(movie, true);
     }
 
     private void loadActionbar(){
@@ -49,18 +49,21 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
     }
 
-    private void loadMovieData(@NonNull Movie moviePoster){
+    private void loadMovieData(@NonNull Movie movie, boolean tryReloadDataWhenNull){
+        this.movie = movie;
+
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null) actionBar.setTitle(moviePoster.getTitle());
+        if(actionBar != null) actionBar.setTitle(movie.getTitle());
 
-        api.getMovieDetail(moviePoster.getId(), (movie) -> runOnUiThread(() -> {
-            this.movie = movie;
-            if(actionBar != null) actionBar.setTitle(movie.getTitle());
+        if (movie.getHeaderImage() != null)
+            Images.loadImage(movie.getHeaderImage(), findViewById(R.id.actionBarImage));
 
-            Images.loadImage(movie.getBackdrop(), findViewById(R.id.actionBarImage));
-
+        if (movie.getDescription() != null)
             detailsList.addView(generateDetailView(getResources().getString(R.string.description), movie.getDescription(), R.drawable.ic_info));
-        }));
+
+        /*if(tryReloadDataWhenNull && (movie.getHeaderImage() == null) || movie.getDescription() == null) api.getMovieDetail(movie.getID(), (newMovie) -> runOnUiThread(() -> {
+            loadMovieData(newMovie, false);
+        }));*/
     }
 
     private RelativeLayout generateDetailView(@NonNull String title, @NonNull String content, @Nullable Integer imageResource){

@@ -10,7 +10,7 @@ import java.util.List;
 import nl.bioscoop.biosapi.model.Ticket;
 
 public @Dao interface TicketDAO {
-    @Query("SELECT * FROM ticket") List<Ticket> getTickets();
+    @Query("SELECT * FROM ticket ORDER BY datetime") List<Ticket> getTickets();
 
     @Insert void insert(Ticket... users);
 

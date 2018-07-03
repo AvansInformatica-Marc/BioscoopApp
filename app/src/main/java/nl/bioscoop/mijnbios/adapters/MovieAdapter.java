@@ -10,20 +10,20 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import nl.bioscoop.biosapi.model.movie.MoviePoster;
+import nl.bioscoop.biosapi.model.Movie;
 import nl.bioscoop.mijnbios.R;
 import nl.bioscoop.mijnbios.utils.Images;
 
 import static nl.bioscoop.mijnbios.utils.Views.inflateLayout;
 
-public class MovieAdapter extends ArrayAdapter<MoviePoster> {
-    public MovieAdapter(@NonNull Context context, @NonNull ArrayList<MoviePoster> list){
+public class MovieAdapter extends ArrayAdapter<Movie> {
+    public MovieAdapter(@NonNull Context context, @NonNull ArrayList<Movie> list){
         super(context, 0, list);
     }
 
     @Override @NonNull public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         @NonNull View view = convertView != null ? convertView : inflateLayout(R.layout.activity_main_movie_item, parent);
-        @Nullable MoviePoster movie = getItem(position);
+        @Nullable Movie movie = getItem(position);
 
         if(movie == null) {
             view.setVisibility(View.GONE);
@@ -32,7 +32,8 @@ public class MovieAdapter extends ArrayAdapter<MoviePoster> {
             TextView movieTitle = view.findViewById(R.id.title);
             movieTitle.setText(movie.getTitle());
 
-            Images.loadImage(movie.getPoster(), view.findViewById(R.id.poster));
+            if (movie.getPosterImage() != null)
+                Images.loadImage(movie.getPosterImage(), view.findViewById(R.id.poster));
         }
 
         return view;

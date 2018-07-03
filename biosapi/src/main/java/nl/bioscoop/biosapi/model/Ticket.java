@@ -2,42 +2,36 @@ package nl.bioscoop.biosapi.model;
 
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-import nl.bioscoop.biosapi.model.movie.Movie;
+import java.io.Serializable;
 
-@Entity
-public class Ticket {
-    @PrimaryKey private int id;
+public @Entity class Ticket implements Serializable {
+    @PrimaryKey private int ID;
     private @NonNull String seat;
-    @Embedded private Movie movie;
-    @Embedded private Show show;
+    private @Embedded @NonNull Show show;
 
-    public Ticket(@NonNull String seat, Movie movie, Show show) {
+    @Ignore public Ticket(@NonNull String seat, @NonNull Show show) {
+        this(seat.hashCode() * show.getID(), seat, show);
+    }
+
+    public Ticket(int ID, @NonNull String seat, @NonNull Show show) {
+        this.ID = ID;
         this.seat = seat;
-        this.movie = new Movie(movie.getID(), movie.getTitle()); // Don't save data like image urls or descriptions into the DB
         this.show = show;
-        this.id = seat.hashCode() * movie.getID() * show.getID();
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    @NonNull public String getSeat() {
+    public @NonNull String getSeat() {
         return seat;
     }
 
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public Show getShow() {
+    public @NonNull Show getShow() {
         return show;
-    }
-
-    /* ONLY FOR DATABASE */  public void setId(int id) {
-        this.id = id;
     }
 }

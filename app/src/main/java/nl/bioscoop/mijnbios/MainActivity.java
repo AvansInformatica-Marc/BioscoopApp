@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import nl.bioscoop.biosapi.BiosAPI;
 import nl.bioscoop.biosapi.database.BiosDatabase;
 import nl.bioscoop.biosapi.database.TicketDAO;
+import nl.bioscoop.biosapi.model.Movie;
 import nl.bioscoop.biosapi.model.Ticket;
-import nl.bioscoop.biosapi.model.movie.MoviePoster;
 import nl.bioscoop.biosapi.utils.DataLoader;
 import nl.bioscoop.mijnbios.adapters.MovieAdapter;
 import nl.bioscoop.mijnbios.adapters.TicketsAdapter;
@@ -102,13 +102,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    class MoviesTab extends Tab<MoviePoster> {
+    class MoviesTab extends Tab<Movie> {
         public MoviesTab(){
             super(R.id.movieGrid);
 
             listView.setAdapter(new MovieAdapter(MainActivity.this, list));
             listView.setOnItemClickListener((adapterView, view, i, l) -> {
-                MoviePoster movie = ((MovieAdapter) listView.getAdapter()).getItem(i);
+                Movie movie = ((MovieAdapter) listView.getAdapter()).getItem(i);
                 if(movie != null) {
                     Intent intent = new Intent(MainActivity.this, MovieDetailActivity.class);
                     intent.putExtra(Config.EXTRA_MOVIE, movie);

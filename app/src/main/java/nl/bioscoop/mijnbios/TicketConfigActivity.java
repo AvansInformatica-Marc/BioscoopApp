@@ -17,8 +17,6 @@ import nl.bioscoop.biosapi.database.BiosDatabase;
 import nl.bioscoop.biosapi.database.TicketDAO;
 import nl.bioscoop.biosapi.model.Show;
 import nl.bioscoop.biosapi.model.Ticket;
-import nl.bioscoop.biosapi.model.movie.Movie;
-import nl.bioscoop.biosapi.model.movie.MovieDetails;
 import nl.bioscoop.biosapi.utils.DataLoader;
 import nl.bioscoop.mijnbios.utils.DateTime;
 import nl.bioscoop.mijnbios.utils.Images;
@@ -28,8 +26,8 @@ import static nl.bioscoop.mijnbios.utils.Async.async;
 
 public class TicketConfigActivity extends AppCompatActivity {
     private BiosAPI api;
-    private Movie movie;
     private Show show;
+    private int ticketAmount;
     private AlertDialog alertDialog;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
@@ -39,44 +37,67 @@ public class TicketConfigActivity extends AppCompatActivity {
         api = new BiosAPI(new DataLoader(this, Config.MAX_CACHE_SIZE_MB), getResources().getString(R.string.languageCode));
 
         Intent intent = getIntent();
-        movie = (Movie) intent.getSerializableExtra(Config.EXTRA_MOVIE);
         show = (Show) intent.getSerializableExtra(Config.EXTRA_SHOW);
-        if(movie != null && show != null) loadData(movie, show);
+        ticketAmount = intent.getIntExtra(Config.EXTRA_TICKETAMOUNT, 1);
+        if(show != null) loadData(show, ticketAmount);
     }
 
-    public void loadData(@NonNull Movie movie, @NonNull Show show){
+    public void loadData(@NonNull Show show, int ticketAmount){
+        TextView ticketAmountView = findViewById(R.id.ticketAmount);
+        ticketAmountView.setText(String.valueOf(ticketAmount));
+
         TextView location = findViewById(R.id.location);
-        location.setText(show.getLocation());
+        location.setText(show.getHall().getCinema().getLocation().toShortString());
 
         TextView datetime = findViewById(R.id.datetime);
         datetime.setText(DateTime.format(show.getDatetime(), DateFormat.MEDIUM, DateFormat.SHORT, " - ", true, Locale.getDefault()));
 
         TextView movieTitle = findViewById(R.id.movieTitle);
-        movieTitle.setText(movie.getTitle());
+        movieTitle.setText(show.getMovie().getTitle());
 
-        if(movie instanceof MovieDetails){
-            MovieDetails movieDetails = (MovieDetails) movie;
-            Images.loadImage(movieDetails.getBackdrop(), findViewById(R.id.movieBackdrop));
-        }
+        if (show.getMovie().getHeaderImage() != null)
+            Images.loadImage(show.getMovie().getHeaderImage(), findViewById(R.id.movieBackdrop));
+
+        TextView priceView = findViewById(R.id.price);
+        priceView.setText(R.string.loading);
+        api.getTicketPrice(show, ticketAmount, (price) -> runOnUiThread(() -> priceView.setText(getPriceDisplayString(price))));
+    }
+
+    private String getPriceDisplayString(double price){
+        String priceString = String.valueOf(price).replace(".", ",");
+        return "€" + (price % 1 == 0 ? (priceString.contains(",") ? priceString.split(",")[0] : priceString) + ",-" : priceString);
+    }
+
+    private AlertDialog createLoadingDialog(){
+        return new AlertDialog.Builder(this).setView(Views.inflateLayout(R.layout.dialog_loading, this)).show();
     }
 
     public void buyTickets(View v){
-        LinearLayout dummyPaymentView = Views.inflateLayout(R.layout.dummy_payment, this);
+        AlertDialog dialog = createLoadingDialog();
+        api.getTicketPrice(show, ticketAmount, (price) -> runOnUiThread(() -> {
+            dialog.dismiss();
+            LinearLayout dummyPaymentView = Views.inflateLayout(R.layout.dialog_dummy_payment, this);
 
-        TextView title = dummyPaymentView.findViewById(R.id.title);
-        title.setText("Movie tickets (" + getString(R.string.app_name) + ")");
+            TextView title = dummyPaymentView.findViewById(R.id.title);
+            title.setText(getResources().getString(R.string.movieTickets) + " (" + getString(R.string.app_name) + ")");
 
-        TextView price = dummyPaymentView.findViewById(R.id.price);
-        price.setText("€5,-");
+            TextView priceView = dummyPaymentView.findViewById(R.id.price);
+            priceView.setText(getPriceDisplayString(price));
 
-        alertDialog = new AlertDialog.Builder(this).setView(dummyPaymentView).show();
+            alertDialog = new AlertDialog.Builder(this).setView(dummyPaymentView).show();
+        }));
     }
 
     public void onPaymentConfirmed(View v){
         alertDialog.dismiss();
-
-        Ticket ticket = new Ticket("1", movie, show);
-        TicketDAO ticketDAO = BiosDatabase.getInstance(this).getDB().ticketDAO();
-        async(() -> ticketDAO.insert(ticket));
+        AlertDialog dialog = createLoadingDialog();
+        api.getSeats(show, ticketAmount, (seats) -> {
+            TicketDAO ticketDAO = BiosDatabase.getInstance(this).getDB().ticketDAO();
+            for(String seat : seats){
+                Ticket ticket = new Ticket(seat, show);
+                async(() -> ticketDAO.insert(ticket));
+            }
+            dialog.dismiss();
+        });
     }
 }

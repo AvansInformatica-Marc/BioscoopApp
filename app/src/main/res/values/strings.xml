@@ -7,6 +7,7 @@
     <string name="locations">Locations</string>
     <string name="tickets">Tickets</string>
     <string name="movies">Movies</string>
+    <string name="movieTickets">Movie tickets</string>
     <string name="buyTickets">Buy ticket(s)</string>
     <string name="totalPrice">Total price</string>
     <string name="selectedShow">Selected show:</string>
@@ -14,4 +15,5 @@
     <string name="ticketAmount">Amount of tickets:</string>
     <string name="buy">Buy</string>
     <string name="dummyPaymentText">By clicking \'buy\', you agree to the terms of service.</string>
+    <string name="loading">Loading…</string>
 </resources>

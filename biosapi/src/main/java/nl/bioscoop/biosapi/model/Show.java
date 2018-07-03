@@ -1,6 +1,7 @@
 package nl.bioscoop.biosapi.model;
 
 import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Embedded;
 import android.support.annotation.NonNull;
 
 import org.json.JSONException;
@@ -14,59 +15,44 @@ import java.util.Locale;
 
 public class Show implements Serializable {
     @ColumnInfo(name = "showID")
-    private int id;
-    private int hallID;
-    private int cinemaID;
-    private Date datetime;
-    private @NonNull String location;
+    private int ID;
+    private @NonNull @Embedded Movie movie;
+    private @NonNull @Embedded Hall hall;
+    private @NonNull Date datetime;
 
-    public Show(@NonNull JSONObject json) throws JSONException, ParseException {
+    public Show(@NonNull JSONObject json, @NonNull Movie movie) throws JSONException, ParseException {
         this(
-                json.getInt("hallID"),
-                json.getInt("showID"),
-                json.getInt("cinemaID"),
-                json.getString("datetime"),
-                json.getJSONObject("location").getString("street") + ", " + json.getJSONObject("location").getString("city")
+                json.getInt("id"),
+                movie,
+                new Hall(json.getJSONObject("hall")),
+                json.getString("datetime")
         );
     }
 
-    public Show(int id, int hallID, int cinemaID, @NonNull String datetime, @NonNull String location) throws ParseException {
-        this(id, hallID, cinemaID, new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.UK).parse(datetime), location);
+    public Show(int ID, @NonNull Movie movie, @NonNull Hall hall, @NonNull String datetime) throws ParseException {
+        this(ID, movie, hall, new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.UK).parse(datetime));
     }
 
-    public Show(int id, int hallID, int cinemaID, Date datetime, @NonNull String location) {
-        this.id = id;
-        this.hallID = hallID;
-        this.cinemaID = cinemaID;
+    public Show(int ID, @NonNull Movie movie, @NonNull Hall hall, @NonNull Date datetime) {
+        this.ID = ID;
+        this.movie = movie;
+        this.hall = hall;
         this.datetime = datetime;
-        this.location = location;
-    }
-
-    public int getHallID() {
-        return hallID;
     }
 
     public int getID() {
-        return id;
+        return ID;
     }
 
-    public int getCinemaID() {
-        return cinemaID;
+    public @NonNull Movie getMovie() {
+        return movie;
     }
 
-    public Date getDatetime() {
+    public @NonNull Hall getHall() {
+        return hall;
+    }
+
+    public @NonNull Date getDatetime() {
         return datetime;
-    }
-
-    @NonNull public String getLocation() {
-        return location;
-    }
-
-    /* ONLY FOR DATABASE */ public void setDatetime(Date datetime) {
-        this.datetime = datetime;
-    }
-
-    /* ONLY FOR DATABASE */  public int getId() {
-        return getID();
     }
 }
