@@ -33,7 +33,8 @@ public class TicketsAdapter extends ArrayAdapter<Ticket> {
             view.setVisibility(View.VISIBLE);
 
             TextView seat = view.findViewById(R.id.seat);
-            seat.setText(ticket.getSeat());
+            String[] seats = ticket.getSeat().split(",");
+            seat.setText(seats.length > 1 ? seats[0] + "-" + seats[seats.length - 1] : seats[0]);
 
             TextView movieTitle = view.findViewById(R.id.movieTitle);
             movieTitle.setText(ticket.getShow().getMovie().getTitle());

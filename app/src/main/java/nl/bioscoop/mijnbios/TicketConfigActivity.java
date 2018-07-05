@@ -98,13 +98,18 @@ public class TicketConfigActivity extends AppCompatActivity {
                         .setMessage("Ticket reservation has been cancelled: there are no free seats left.")
                         .show();
             } else {
-                Ticket[] tickets = new Ticket[seats.size()];
+                StringBuilder seatStringBuilder = new StringBuilder();
+                for(String seat : seats) seatStringBuilder.append(seat).append(",");
+                String seatString = seatStringBuilder.toString();
+                seatString = seatString.substring(0, seatString.length() - 1);
+                Ticket ticket = new Ticket(seatString, show);
+                /*Ticket[] tickets = new Ticket[seats.size()];
                 for(int i = 0; i < seats.size(); i++)
-                    tickets[i] = new Ticket(seats.get(i), show);
+                    tickets[i] = new Ticket(seats.get(i), show);*/
 
                 TicketDAO ticketDAO = BiosDatabase.getInstance(this).getDB().ticketDAO();
                 async(() -> {
-                    ticketDAO.insert(tickets);
+                    ticketDAO.insert(ticket);
                     runOnUiThread(() -> {
                         dialog.dismiss();
                         Intent intent = new Intent(TicketConfigActivity.this, MainActivity.class);
