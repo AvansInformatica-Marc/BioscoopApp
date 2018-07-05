@@ -16,9 +16,11 @@ import java.util.ArrayList;
 import nl.bioscoop.biosapi.BiosAPI;
 import nl.bioscoop.biosapi.database.BiosDatabase;
 import nl.bioscoop.biosapi.database.TicketDAO;
+import nl.bioscoop.biosapi.model.Cinema;
 import nl.bioscoop.biosapi.model.Movie;
 import nl.bioscoop.biosapi.model.Ticket;
 import nl.bioscoop.biosapi.utils.DataLoader;
+import nl.bioscoop.mijnbios.adapters.CinemaAdapter;
 import nl.bioscoop.mijnbios.adapters.MovieAdapter;
 import nl.bioscoop.mijnbios.adapters.TicketsAdapter;
 
@@ -139,14 +141,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    class LocationsTab extends Tab<Object> {
+    class LocationsTab extends Tab<Cinema> {
         public LocationsTab(){
             super(R.id.locationsList);
-            // TODO
+            listView.setAdapter(new CinemaAdapter(MainActivity.this, list));
         }
 
         public void loadData(){
-            // TODO
+            swipeRefreshLayout.setRefreshing(true);
+            api.getCinemas((cinemaList) -> {
+                list.clear();
+                list.addAll(cinemaList);
+                runOnUiThread(((CinemaAdapter) listView.getAdapter())::notifyDataSetChanged);
+                swipeRefreshLayout.setRefreshing(false);
+            });
         }
     }
 

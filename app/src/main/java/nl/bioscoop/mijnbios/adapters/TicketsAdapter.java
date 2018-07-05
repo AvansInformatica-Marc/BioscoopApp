@@ -15,8 +15,7 @@ import java.util.Locale;
 import nl.bioscoop.biosapi.model.Ticket;
 import nl.bioscoop.mijnbios.R;
 import nl.bioscoop.mijnbios.utils.DateTime;
-
-import static nl.bioscoop.mijnbios.utils.Views.inflateLayout;
+import nl.bioscoop.mijnbios.utils.Views;
 
 public class TicketsAdapter extends ArrayAdapter<Ticket> {
     public TicketsAdapter(@NonNull Context context, @NonNull ArrayList<Ticket> list){
@@ -24,7 +23,7 @@ public class TicketsAdapter extends ArrayAdapter<Ticket> {
     }
 
     @Override @NonNull public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        @NonNull View view = convertView != null ? convertView : inflateLayout(R.layout.activity_main_ticket_item, parent);
+        @NonNull View view = convertView != null ? convertView : Views.inflateLayout(R.layout.activity_main_ticket_item, parent);
         @Nullable Ticket ticket = getItem(position);
 
         if(ticket == null) {
@@ -41,9 +40,6 @@ public class TicketsAdapter extends ArrayAdapter<Ticket> {
 
             TextView datetime = view.findViewById(R.id.datetime);
             datetime.setText(DateTime.format(ticket.getShow().getDatetime(), DateFormat.MEDIUM, DateFormat.SHORT, " - ", true, Locale.getDefault()));
-
-            /*TextView location = view.findViewById(R.id.location);
-            location.setText(ticket.getShow().getHall().getCinema().getLocation().toShortString());*/
         }
 
         return view;

@@ -44,7 +44,7 @@ public class Location implements Serializable {
         return street + ", " + city;
     }
 
-    @NonNull public String toLongString() {
-        return street + " " + number + ", " + postalCode + " " + city;
+    @NonNull public String toLongString(boolean multiline) {
+        return street + " " + number + "," + (multiline ? "\n" : " ") + postalCode + " " + city;
     }
 }

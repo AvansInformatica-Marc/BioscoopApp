@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import nl.bioscoop.biosapi.model.Cinema;
 import nl.bioscoop.biosapi.model.Movie;
 import nl.bioscoop.biosapi.model.Show;
 import nl.bioscoop.biosapi.utils.DataLoader;
@@ -82,6 +83,26 @@ public class BiosAPI {
                 }
 
                 callback.onReceiveValue(shows);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public void getCinemas(@NonNull ValueCallback<ArrayList<Cinema>> callback){
+        dataLoader.load(API_URL + "cinemas", (responseBody) -> {
+            if(responseBody == null) return;
+
+            try {
+                JSONArray cinemaList = new JSONArray(responseBody);
+                ArrayList<Cinema> cinemas = new ArrayList<>();
+
+                for (int i = 0; i < cinemaList.length(); i++){
+                    @Nullable JSONObject cinema = cinemaList.optJSONObject(i);
+                    if(cinema != null) cinemas.add(new Cinema(cinema));
+                }
+
+                callback.onReceiveValue(cinemas);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
