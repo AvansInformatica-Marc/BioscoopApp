@@ -20,7 +20,7 @@ public class CinemaAdapter extends ArrayAdapter<Cinema> {
     }
 
     @Override @NonNull public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        @NonNull View view = convertView != null ? convertView : Views.inflateLayout(R.layout.activity_main_ticket_item, parent);
+        @NonNull View view = convertView != null ? convertView : Views.inflateLayout(R.layout.activity_main_location_item, parent);
         @Nullable Cinema cinema = getItem(position);
 
         if(cinema == null) {
