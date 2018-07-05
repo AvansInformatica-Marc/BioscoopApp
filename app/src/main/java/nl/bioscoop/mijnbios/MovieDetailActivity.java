@@ -61,6 +61,9 @@ public class MovieDetailActivity extends AppCompatActivity {
         if (movie.getDescription() != null)
             detailsList.addView(generateDetailView(getResources().getString(R.string.description), movie.getDescription(), R.drawable.ic_info));
 
+        if (movie.getDuration() != null)
+            detailsList.addView(generateDetailView(getResources().getString(R.string.duration), movie.getDuration() + " min.", R.drawable.ic_time));
+
         /*if(tryReloadDataWhenNull && (movie.getHeaderImage() == null) || movie.getDescription() == null) api.getMovieDetail(movie.getID(), (newMovie) -> runOnUiThread(() -> {
             loadMovieData(newMovie, false);
         }));*/

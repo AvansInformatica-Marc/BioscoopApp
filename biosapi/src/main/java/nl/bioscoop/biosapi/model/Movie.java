@@ -17,6 +17,7 @@ public class Movie implements Serializable {
     private @Nullable @Ignore String posterImage;
     private @Nullable @Ignore String headerImage;
     private @Nullable @Ignore String description;
+    private @Nullable @Ignore Integer duration;
 
     public Movie(@NonNull JSONObject json) throws JSONException {
         this(
@@ -24,20 +25,22 @@ public class Movie implements Serializable {
                 json.getString("title"),
                 json.getJSONObject("images").getString("poster"),
                 json.getJSONObject("images").getString("header"),
-                json.getString("description")
+                json.getString("description"),
+                json.optInt("duration")
         );
     }
 
     public Movie(int ID, @NonNull String title) {
-        this(ID, title, null, null, null);
+        this(ID, title, null, null, null, null);
     }
 
-    public Movie(int ID, @NonNull String title, @Nullable String posterImage, @Nullable String headerImage, @Nullable String description) {
+    public Movie(int ID, @NonNull String title, @Nullable String posterImage, @Nullable String headerImage, @Nullable String description, @Nullable Integer duration) {
         this.ID = ID;
         this.title = title;
         this.posterImage = posterImage;
         this.headerImage = headerImage;
         this.description = description;
+        this.duration = duration;
     }
 
     public int getID() {
@@ -58,5 +61,9 @@ public class Movie implements Serializable {
 
     @Nullable public String getDescription() {
         return description;
+    }
+
+    @Nullable public Integer getDuration() {
+        return duration;
     }
 }

@@ -27,10 +27,10 @@ public class TicketDetailActivity extends AppCompatActivity {
     }
 
     public void loadData(@NonNull Ticket ticket){
-        String qrString = "L" + ticket.getShow().getHall().getCinema().getLocation().toShortString() + "|H" +
-                ticket.getShow().getHall().getName() + "|DT" +
-                ticket.getShow().getDatetime().getTime() + "|M" +
-                ticket.getShow().getMovie().getTitle() + "|S" +
+        String qrString = "L:" + ticket.getShow().getHall().getCinema().getLocation().toShortString() + "|H:" +
+                ticket.getShow().getHall().getName() + "|DT:" +
+                ticket.getShow().getDatetime().getTime() + "|M:" +
+                ticket.getShow().getMovie().getTitle() + "|S:" +
                 ticket.getSeat();
         Bitmap qrBitmap = QRCode.from(qrString).withSize(500, 500).withColor(0xFF000000, 0x00000000).bitmap();
         ImageView qrCode = findViewById(R.id.qrCode);
