@@ -59,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override protected void onNewIntent(Intent intent) {
+        switchTab(intent.getIntExtra(Config.EXTRA_TABID, 0));
+    }
+
     public void switchTab(int position){
         tabs[0].onHide();
         tabs[1].onHide();
@@ -153,6 +157,11 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });*/
+        }
+
+        @Override @CallSuper public void onShow() {
+            super.onShow();
+            loadData();
         }
 
         public void loadData(){
