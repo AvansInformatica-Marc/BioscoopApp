@@ -27,6 +27,7 @@ import static nl.bioscoop.mijnbios.utils.Async.async;
 public class MainActivity extends AppCompatActivity {
     private BiosAPI api;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private BottomNavigationView bottomNavigationView;
     private Tab[] tabs;
 
     @Override @CallSuper protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         switchTab(intent.getIntExtra(Config.EXTRA_TABID, 0));
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
             int position = menuItem.getItemId() == R.id.movies ? 0 :
                             menuItem.getItemId() == R.id.locations ? 1 :
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         tabs[1].onHide();
         tabs[2].onHide();
 
+        bottomNavigationView.setSelectedItemId(position);
         tabs[position].onShow();
     }
 

@@ -48,16 +48,6 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     tools:text="Date and time" />
 
-                <TextView
-                    android:id="@+id/location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="16dp"
-                    android:drawableStart="@drawable/ic_location"
-                    android:padding="8dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    tools:text="Location" />
-
             </LinearLayout>
 
             <TextView
