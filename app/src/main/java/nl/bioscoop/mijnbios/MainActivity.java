@@ -46,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
                 new TicketsTab()
         };
 
-        switchTab(0);
+        Intent intent = getIntent();
+        switchTab(intent.getIntExtra(Config.EXTRA_TABID, 0));
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {

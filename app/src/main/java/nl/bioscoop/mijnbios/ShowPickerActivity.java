@@ -43,7 +43,7 @@ public class ShowPickerActivity extends AppCompatActivity {
             numberPicker.setMinValue(1);
             numberPicker.setValue(1);
             if(show != null && show.getHall().getSeatsHorizontal() != null && show.getHall().getSeatsVertical() != null)
-                numberPicker.setMaxValue(show.getHall().getSeatsHorizontal() * show.getHall().getSeatsVertical());
+                numberPicker.setMaxValue((show.getHall().getSeatsHorizontal() * show.getHall().getSeatsVertical()) - (show.getSeatsTaken() != null ? show.getSeatsTaken() : 0));
 
             new AlertDialog.Builder(this)
                     .setTitle(R.string.ticketAmount)

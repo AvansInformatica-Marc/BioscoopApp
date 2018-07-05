@@ -92,12 +92,28 @@ public class TicketConfigActivity extends AppCompatActivity {
         alertDialog.dismiss();
         AlertDialog dialog = createLoadingDialog();
         api.getSeats(show, ticketAmount, (seats) -> {
-            TicketDAO ticketDAO = BiosDatabase.getInstance(this).getDB().ticketDAO();
-            for(String seat : seats){
-                Ticket ticket = new Ticket(seat, show);
-                async(() -> ticketDAO.insert(ticket));
+            if(seats.size() == 0){
+                dialog.dismiss();
+                new AlertDialog.Builder(this).setTitle("Failure")
+                        .setMessage("Ticket reservation has been cancelled: there are no free seats left.")
+                        .show();
+            } else {
+                Ticket[] tickets = new Ticket[seats.size()];
+                for(int i = 0; i < seats.size(); i++)
+                    tickets[i] = new Ticket(seats.get(i), show);
+
+                TicketDAO ticketDAO = BiosDatabase.getInstance(this).getDB().ticketDAO();
+                async(() -> {
+                    ticketDAO.insert(tickets);
+                    runOnUiThread(() -> {
+                        dialog.dismiss();
+                        Intent intent = new Intent(TicketConfigActivity.this, MainActivity.class);
+                        intent.putExtra(Config.EXTRA_TABID, 2);
+                        startActivity(intent);
+                        finish();
+                    });
+                });
             }
-            dialog.dismiss();
         });
     }
 }
