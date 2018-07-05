@@ -1,0 +1,27 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Colors -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
+
+        <!-- Scrollbars -->
+        <item name="android:scrollbarThumbVertical">?android:attr/colorAccent</item>
+        <item name="android:scrollbarThumbHorizontal">?android:attr/colorAccent</item>
+        <item name="android:scrollbarSize">2dp</item>
+    </style>
+
+    <style name="AppTheme.BottomNavigationBar" parent="AppTheme">
+        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@color/statusBarColor</item>
+    </style>
+
+</resources>

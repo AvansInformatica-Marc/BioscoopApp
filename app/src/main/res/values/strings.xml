@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">MijnBios</string>
+    <string name="description">Description</string>
+    <string name="movie">Movie</string>
+    <string name="book">Book</string>
+    <string name="languageCode">en-US</string>
+    <string name="locations">Locations</string>
+    <string name="tickets">Tickets</string>
+    <string name="movies">Movies</string>
+    <string name="movieTickets">Movie tickets</string>
+    <string name="buyTickets">Buy ticket(s)</string>
+    <string name="totalPrice">Total price</string>
+    <string name="selectedShow">Selected show:</string>
+    <string name="selectedMovie">Selected movie:</string>
+    <string name="ticketAmount">Amount of tickets:</string>
+    <string name="buy">Buy</string>
+    <string name="dummyPaymentText">By clicking \'buy\', you agree to the terms of service.</string>
+    <string name="loading">Loading…</string>
+    <string name="showSoldOut">This show has been sold out</string>
+    <string name="ticketReservationCancelledNoFreeSeats">Ticket reservation has been cancelled: there are no free seats left.</string>
+    <string name="oops">Oops!</string>
+    <string name="hall">Hall</string>
+    <string name="duration">Duration</string>
+</resources>

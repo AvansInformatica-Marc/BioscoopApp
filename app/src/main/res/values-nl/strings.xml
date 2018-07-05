@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MijnBios</string>
+    <string name="description">Beschrijving</string>
+    <string name="movie">Film</string>
+    <string name="book">Reserveer</string>
+    <string name="languageCode">nl-NL</string>
+    <string name="locations">Locaties</string>
+    <string name="tickets">Kaartjes</string>
+    <string name="movies">Films</string>
+    <string name="buyTickets">Koop kaartje(s)</string>
+    <string name="totalPrice">Totale prijs</string>
+    <string name="selectedShow">Geselecteerde weergave</string>
+    <string name="selectedMovie">Geselecteerde film:</string>
+    <string name="ticketAmount">Hoeveelheid kaartjes:</string>
+    <string name="buy">Kopen</string>
+    <string name="dummyPaymentText">Door op \'kopen\' te klikken, accepteer je de servicevoorwaarden.</string>
+    <string name="loading">Aan het laden…</string>
+    <string name="movieTickets">Filmkaartjes</string>
+    <string name="showSoldOut">Deze weergave is uitverkocht</string>
+    <string name="ticketReservationCancelledNoFreeSeats">Reservatie is geannuleerd: de kaartjes zijn helaas uitverkocht.</string>
+    <string name="oops">Oeps!</string>
+    <string name="hall">Zaal</string>
+    <string name="duration">Duur</string>
+</resources>
