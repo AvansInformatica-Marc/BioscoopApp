@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +28,7 @@ import static nl.bioscoop.mijnbios.utils.Async.async;
 public class MainActivity extends AppCompatActivity {
     private BiosAPI api;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private BottomNavigationView bottomNavigationView;
+    private @Nullable BottomNavigationView bottomNavigationView;
     private Tab[] tabs;
 
     @Override @CallSuper protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +48,6 @@ public class MainActivity extends AppCompatActivity {
                 new TicketsTab()
         };
 
-        Intent intent = getIntent();
-        switchTab(intent.getIntExtra(Config.EXTRA_TABID, 0));
-
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
             int position = menuItem.getItemId() == R.id.movies ? 0 :
@@ -58,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
             switchTab(position);
             return position != -1;
         });
+
+        Intent intent = getIntent();
+        switchTab(intent.getIntExtra(Config.EXTRA_TABID, 0));
     }
 
     @Override protected void onNewIntent(Intent intent) {
