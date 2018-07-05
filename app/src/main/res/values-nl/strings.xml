@@ -20,4 +20,5 @@
     <string name="showSoldOut">Deze weergave is uitverkocht</string>
     <string name="ticketReservationCancelledNoFreeSeats">Reservatie is geannuleerd: de kaartjes zijn helaas uitverkocht.</string>
     <string name="oops">Oeps!</string>
+    <string name="hall">Zaal</string>
 </resources>

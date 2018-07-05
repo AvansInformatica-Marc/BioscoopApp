@@ -163,14 +163,14 @@ public class MainActivity extends AppCompatActivity {
             super(R.id.ticketsList);
 
             listView.setAdapter(new TicketsAdapter(MainActivity.this, list));
-            /*listView.setOnItemClickListener((adapterView, view, i, l) -> {
+            listView.setOnItemClickListener((adapterView, view, i, l) -> {
                 Ticket ticket = ((TicketsAdapter) listView.getAdapter()).getItem(i);
                 if(ticket != null) {
-                    Intent intent = new Intent(MainActivity.this, TicketActivity.class);
+                    Intent intent = new Intent(MainActivity.this, TicketDetailActivity.class);
                     intent.putExtra(Config.EXTRA_TICKET, ticket);
                     startActivity(intent);
                 }
-            });*/
+            });
         }
 
         @Override @CallSuper public void onShow() {

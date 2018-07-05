@@ -19,4 +19,5 @@
     <string name="showSoldOut">This show has been sold out</string>
     <string name="ticketReservationCancelledNoFreeSeats">Ticket reservation has been cancelled: there are no free seats left.</string>
     <string name="oops">Oops!</string>
+    <string name="hall">Hall</string>
 </resources>

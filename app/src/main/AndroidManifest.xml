@@ -41,6 +41,11 @@
             android:label="@string/buyTickets"
             android:launchMode="singleTask"
             android:parentActivityName=".MovieDetailActivity" />
+        <activity
+            android:name=".TicketDetailActivity"
+            android:configChanges="keyboard|keyboardHidden|mcc|mnc|orientation|screenSize|locale|layoutDirection|smallestScreenSize|screenLayout|uiMode"
+            android:launchMode="singleTask"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>
