@@ -16,4 +16,7 @@
     <string name="buy">Buy</string>
     <string name="dummyPaymentText">By clicking \'buy\', you agree to the terms of service.</string>
     <string name="loading">Loading…</string>
+    <string name="showSoldOut">This show has been sold out</string>
+    <string name="ticketReservationCancelledNoFreeSeats">Ticket reservation has been cancelled: there are no free seats left.</string>
+    <string name="oops">Oops!</string>
 </resources>

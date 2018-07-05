@@ -17,4 +17,7 @@
     <string name="dummyPaymentText">Door op \'kopen\' te klikken, accepteer je de servicevoorwaarden.</string>
     <string name="loading">Aan het laden…</string>
     <string name="movieTickets">Filmkaartjes</string>
+    <string name="showSoldOut">Deze weergave is uitverkocht</string>
+    <string name="ticketReservationCancelledNoFreeSeats">Reservatie is geannuleerd: de kaartjes zijn helaas uitverkocht.</string>
+    <string name="oops">Oeps!</string>
 </resources>

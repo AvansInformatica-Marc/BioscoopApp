@@ -94,8 +94,8 @@ public class TicketConfigActivity extends AppCompatActivity {
         api.getSeats(show, ticketAmount, (seats) -> {
             if(seats.size() == 0){
                 dialog.dismiss();
-                new AlertDialog.Builder(this).setTitle("Failure")
-                        .setMessage("Ticket reservation has been cancelled: there are no free seats left.")
+                new AlertDialog.Builder(this).setTitle(R.string.oops)
+                        .setMessage(R.string.ticketReservationCancelledNoFreeSeats)
                         .show();
             } else {
                 StringBuilder seatStringBuilder = new StringBuilder();
