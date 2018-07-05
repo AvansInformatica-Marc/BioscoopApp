@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
-import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -28,7 +27,7 @@ import static nl.bioscoop.mijnbios.utils.Async.async;
 public class MainActivity extends AppCompatActivity {
     private BiosAPI api;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private @Nullable BottomNavigationView bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
     private Tab[] tabs;
 
     @Override @CallSuper protected void onCreate(Bundle savedInstanceState) {
@@ -53,25 +52,29 @@ public class MainActivity extends AppCompatActivity {
             int position = menuItem.getItemId() == R.id.movies ? 0 :
                             menuItem.getItemId() == R.id.locations ? 1 :
                             menuItem.getItemId() == R.id.tickets ? 2 : -1;
-            switchTab(position);
+            switchTab(position, false);
             return position != -1;
         });
 
         Intent intent = getIntent();
-        switchTab(intent.getIntExtra(Config.EXTRA_TABID, 0));
+        switchTab(intent.getIntExtra(Config.EXTRA_TABID, 0), true);
     }
 
     @Override protected void onNewIntent(Intent intent) {
-        switchTab(intent.getIntExtra(Config.EXTRA_TABID, 0));
+        switchTab(intent.getIntExtra(Config.EXTRA_TABID, 0), true);
     }
 
-    public void switchTab(int position){
-        tabs[0].onHide();
-        tabs[1].onHide();
-        tabs[2].onHide();
-
-        bottomNavigationView.setSelectedItemId(position);
-        tabs[position].onShow();
+    public void switchTab(int position, boolean updateBottomNavigation) {
+        if (updateBottomNavigation){
+            bottomNavigationView.setSelectedItemId(position == 0 ? R.id.movies :
+                                                    position == 1 ? R.id.locations :
+                                                    position == 2 ? R.id.tickets : -1);
+        } else {
+            tabs[0].onHide();
+            tabs[1].onHide();
+            tabs[2].onHide();
+            tabs[position].onShow();
+        }
     }
 
     @Override public void onConfigurationChanged(Configuration newConfig) {
